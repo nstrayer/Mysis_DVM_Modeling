@@ -2,6 +2,8 @@
 # Functions that drive the model are written in the form Foo_Foo
 # Variables that go into the model are writtenin camelCase. E.g. fooFoo. 
 
+#This is an example of watching changes happen using github. 
+
 Light_Response = function(lightLevels){
 }
 
