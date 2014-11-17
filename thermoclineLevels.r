@@ -1,4 +1,5 @@
 #Script to generate light levels for mysis dvm model. 
+setwd("/Users/Nick/mysisModeling")
 
 thermoclineDist = function(t){
   maxThermDepth = 40
@@ -13,8 +14,17 @@ thermoclineDist = function(t){
     x = t - (2190*2)
     dist = (-maxThermDepth)/(1 + exp(-(n2 + n1*x))) + maxThermDepth
   }
+  return(dist)
 }
 
 time  = 0:(365*24) 
-dist = lapply(time,thermoclineDist )
-plot(time, dist)
+dist = c()
+
+for (t in time){ dist = c(dist, thermoclineDist(t)) }
+
+
+data = cbind(time, dist)
+write.csv(data, "thermoclineDepths.csv", row.names=FALSE)
+
+head(data)
+plot(time,dist)
