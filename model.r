@@ -4,8 +4,16 @@ setwd("/Users/Nick/mysisModeling")
 # Variables that go into the model are writtenin camelCase. E.g. fooFoo. 
 
 #Let's bring in the thermocline depth data
-
+#---------------------------------------------------------------------------------------------
+#Bringing in outside data: 
+#---------------------------------------------------------------------------------------------
 depthData = read.csv("thermoclineDepths.csv")$dist
+
+#---------------------------------------------------------------------------------------------
+#Different function declerations: 
+#---------------------------------------------------------------------------------------------
+Light_Response = function(lightLevels){
+}
 
 Temp_Response  = function(thermoclineDepth){
   pressure = (-1/40)*thermoclineDepth + 1
@@ -21,10 +29,10 @@ Temp_Response  = function(thermoclineDepth){
 # plot(0:(365*24), response)
 # dev.off()
 
-Light_Response = function(lightLevels){
-}
 
-
+#---------------------------------------------------------------------------------------------
+#Class and method declarations: 
+#---------------------------------------------------------------------------------------------
 
 # testing object based r coding: 
 setClass("mysis",
@@ -47,24 +55,46 @@ setMethod("show", "mysis",
 #pre-defined nextTime method for any other R classes. Then we set the method. 
 setGeneric( "nextTime", function(object, ...){standardGeneric("nextTime")})
 setMethod("nextTime","mysis", 
-          function(object, addition){
-            object@cals = object@cals + addition 
-            if(object@migrating == TRUE){ #if they migrated last itteration, reset them. 
-              object@migrating = FALSE
-            }
-            if(object@cals > 200){    #if they meet migration thresholds...
+          function(object, tempPressure){
+            object@cals = object@cals - 3
+            
+            if(object@migrating == TRUE){ #if they migrated last itteration... 
+              object@cals =  object@cals + 10 #they gain calories
+              object@migrating = FALSE #They go back down
+            } else if(object@cals < 10 && tempPressure < .5){     #if they meet migration thresholds...
               object@migrating = TRUE #initiate migration
-              object@cals = 50 #reset the calorie amounts. 
-            } 
+              
+            } else if (object@cals < 5){ #If they are about to starve
+              object@migrating = TRUE #initiate migration
+            }
             object}
           )
 
-#while the mysis is not(!) migrating, loop.
-mysis1 = new("mysis", cals = 30) #initiate a single mysis
 
-counter = 0
-while (counter < 100){
-  mysis1 = nextTime(mysis1, 10)
-  counter = counter + 1
-  print(mysis1)
+#---------------------------------------------------------------------------------------------
+#Model testing: 
+#---------------------------------------------------------------------------------------------
+#mysids = c(new("mysis", cals = 30), new("mysis", cals = 25) )
+
+#Function to initialize 1000 mysids with random (uniform between 5 and 30) calories. 
+
+mysids = NULL
+for (i in 1:10){
+  initialCals = sample(5:30,1)
+  mysids = c(mysids, new("mysis", cals = initialCals) )
 }
+
+allMigrations = NULL
+migrations = NULL
+counter = 1
+while (counter < (365*24)){
+  migrations = NULL
+  for (mysis in mysids){
+    mysis = nextTime(mysis, Temp_Response(counter))
+    migrations = c(migrations, mysis@migrating)
+    print(mysis)
+  }
+  allMigrations = cbind(allMigrations, migrations)
+  counter = counter + 1
+}
+
