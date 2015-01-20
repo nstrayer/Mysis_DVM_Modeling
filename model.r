@@ -63,7 +63,7 @@ setMethod("nextTime","mysis",
               object@migrating = FALSE #They go back down
             } else if(object@cals < 10 && tempPressure < .5){     #if they meet migration thresholds...
               object@migrating = TRUE #initiate migration
-              
+          
             } else if (object@cals < 5){ #If they are about to starve
               object@migrating = TRUE #initiate migration
             }

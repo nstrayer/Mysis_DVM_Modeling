@@ -13,3 +13,4 @@ Just get the model to be where the mysis gets to based upon lowest light or temp
 
 Mysis start migrating at sundown and go back at sunrise. 
 
+ls
