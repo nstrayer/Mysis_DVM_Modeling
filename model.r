@@ -10,10 +10,20 @@ setwd("/Users/Nick/mysisModeling")
 depthData = read.csv("thermoclineDepths.csv")$dist
 
 #---------------------------------------------------------------------------------------------
-#Different function declerations: 
+#Depth of light threshold function: 
 #---------------------------------------------------------------------------------------------
-Light_Response = function(lightLevels){
+lightDepth = function(surfaceLight){
+  
+ #First we will set constants. These will most likely be toggled.
+  k   = 0.15  #extinction coefficient
+  I_x = 0.01 #Mysis light threshold (paper quotes between 10^-2 and 10^-4)
+  
+  distance = (1/k) * (log(surfaceLight) - log(I_x))
+  return(distance)
 }
+
+
+
 
 Temp_Response  = function(thermoclineDepth){
   pressure = (-1/40)*thermoclineDepth + 1
@@ -61,12 +71,14 @@ setMethod("nextTime","mysis",
             if(object@migrating == TRUE){ #if they migrated last itteration... 
               object@cals =  object@cals + 10 #they gain calories
               object@migrating = FALSE #They go back down
+              
             } else if(object@cals < 10 && tempPressure < .5){     #if they meet migration thresholds...
               object@migrating = TRUE #initiate migration
-          
+              
             } else if (object@cals < 5){ #If they are about to starve
               object@migrating = TRUE #initiate migration
             }
+            
             object}
           )
 
