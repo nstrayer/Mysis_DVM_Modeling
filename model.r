@@ -9,21 +9,6 @@ setwd("/Users/Nick/mysisModeling")
 #---------------------------------------------------------------------------------------------
 depthData = read.csv("thermoclineDepths.csv")$dist
 
-#---------------------------------------------------------------------------------------------
-#Depth of light threshold function: 
-#---------------------------------------------------------------------------------------------
-lightDepth = function(surfaceLight){
-  
- #First we will set constants. These will most likely be toggled.
-  k   = 0.15  #extinction coefficient
-  I_x = 0.01 #Mysis light threshold (paper quotes between 10^-2 and 10^-4)
-  
-  distance = (1/k) * (log(surfaceLight) - log(I_x))
-  return(distance)
-}
-
-
-
 
 Temp_Response  = function(thermoclineDepth){
   pressure = (-1/40)*thermoclineDepth + 1
