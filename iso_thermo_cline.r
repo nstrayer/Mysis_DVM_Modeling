@@ -15,7 +15,7 @@ depthData = read.csv("thermoclineDepths.csv")$dist
 lightDepth = function(surfaceLight){
   
   #First we will set constants. These will most likely be toggled.
-  k   = 0.15  #extinction coefficient
+  k   = 0.3  #extinction coefficient
   I_x = 0.01 #Mysis light threshold (paper quotes between 10^-2 and 10^-4)
   
   distance = (1/k) * (log(surfaceLight) - log(I_x))
@@ -23,17 +23,19 @@ lightDepth = function(surfaceLight){
 }
 
 #30 day cycle
-days = 1:30
+#days = 1:30
+days = 1:365
 
 #Nightime light level in lux
 lightLevel = NULL
 
 for (day in days){
-  lightLevel = c(lightLevel, 0.5 * cos((1/30)* 2*pi * day ) + .5)
+  cyclePoint = day %% 30
+  lightLevel = c(lightLevel, 0.5 * cos((1/30)* 2*pi * cyclePoint ) + .5)
 }
 
 #Check to see if this is functional
-#plot(days, lightLevel)
+plot(days, lightLevel, type = "l")
 
 #Now we will run our light depth function over this: 
 isocline = NULL
@@ -44,16 +46,17 @@ for (day in lightLevel){
     isocline = c(isocline, lightDepth(day))
   }
 }
-
+#Check to see if this is functional
+plot(days, isocline, type = "l")
 
 #Now let's grab some of our depth data real quick: 
 smallDepthData = NULL
-for (i in seq(1,24*30, 24)){
+for (i in seq(1,24*365, 24)){
   smallDepthData = c(smallDepthData, depthData[i])
 }
 
 #plot it!
-plot(days, isocline, type = "l", ylab = "isocline depth", main = "Mysis light threshold")
-lines(days, smallDepthData)
+plot(days, smallDepthData , type = "l", ylab = "isocline depth", main = "Mysis light threshold")
+lines(days, isocline)
 
 

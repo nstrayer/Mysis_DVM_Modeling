@@ -13,4 +13,8 @@ Just get the model to be where the mysis gets to based upon lowest light or temp
 
 Mysis start migrating at sundown and go back at sunrise. 
 
-ls
+__Next steps:__
+
+- Import the real light data. 
+- Probability of migrating goes from .9 to .1 from summer to winter. 
+- 
