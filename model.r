@@ -9,7 +9,6 @@ setwd("/Users/Nick/mysisModeling")
 #---------------------------------------------------------------------------------------------
 depthData = read.csv("thermoclineDepths.csv")$dist
 
-
 Temp_Response  = function(thermoclineDepth){
   pressure = (-1/40)*thermoclineDepth + 1
   return(pressure)
