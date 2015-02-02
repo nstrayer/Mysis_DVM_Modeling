@@ -3,26 +3,6 @@ setwd("/Users/Nick/mysisModeling")
 # Functions that drive the model are written in the form Foo_Foo
 # Variables that go into the model are writtenin camelCase. E.g. fooFoo. 
 
-#Let's bring in the thermocline depth data
-#---------------------------------------------------------------------------------------------
-#Bringing in outside data: 
-#---------------------------------------------------------------------------------------------
-depthData = read.csv("thermoclineDepths.csv")$dist
-
-Temp_Response  = function(thermoclineDepth){
-  pressure = (-1/40)*thermoclineDepth + 1
-  return(pressure)
-}
-
-#Code to test out what the response to thermocline depth function looks like
-# response = c()
-# for (depth in depthData){
-#   response = c(response,Temp_Response(depth) )
-# }
-# png("thermoclineResponse.png")
-# plot(0:(365*24), response)
-# dev.off()
-
 
 #---------------------------------------------------------------------------------------------
 #Class and method declarations: 
@@ -31,66 +11,92 @@ Temp_Response  = function(thermoclineDepth){
 # testing object based r coding: 
 setClass("mysis",
          representation(
-           cals = "numeric",
-           migrating = "logical"),
+           energy    = "numeric",    #The energy reserves are a numeric value
+           migrating = "logical",    #If mysis is migrating is a logical value
+           alive     = "logical"),   #Alive still?
          prototype(
-           cals = 0,
-           migrating = FALSE),
+           energy    = 0,            #The default instantiated mysis starts with zero energy...
+           migrating = FALSE,        # and not migrating...
+           alive     = TRUE),        # and alive. 
          )
 
-#Set the show method, basically how we want the program to display the info about the mysis on calling. 
+#Set the show method, basically how we want the program to display the info about the mysis on calling. This is neccesary due to R's quirks
 setMethod("show", "mysis", 
           function(object){
-            print(object@cals)
-            print(object@migrating)
+            if (object@alive){
+              print(object@energy)
+              print(object@migrating)
+            } else {
+              print("dead")
+            }
           })
 
 #Making an a function to step the mysids through time, first we initialize a generic method as there is no
 #pre-defined nextTime method for any other R classes. Then we set the method. 
 setGeneric( "nextTime", function(object, ...){standardGeneric("nextTime")})
 setMethod("nextTime","mysis", 
-          function(object, tempPressure){
-            object@cals = object@cals - 3
+          function(object, foodRatio){       #Takes in the mysis object and the ratio of food quality at a given time. 
             
-            if(object@migrating == TRUE){ #if they migrated last itteration... 
-              object@cals =  object@cals + 10 #they gain calories
-              object@migrating = FALSE #They go back down
+            #Lets set some constants real quick: 
+            migrationRisk = 0.01      #Chance of being eaten if migrating
+            stayRisk      = 0.001     #Chance of being eaten if they stay on the bottom
+            
+            migrationDraw = runif(1) #random number between 0 and 1, this will be used for the migration decision
+            predationDraw = runif(1) #" " to see if killed by predation
+            
+            #Here is the decision tree:
+            if (object@alive){ #If the mysis is alive let's run the decision tree
               
-            } else if(object@cals < 10 && tempPressure < .5){     #if they meet migration thresholds...
-              object@migrating = TRUE #initiate migration
-              
-            } else if (object@cals < 5){ #If they are about to starve
-              object@migrating = TRUE #initiate migration
+              if (migrationDraw < foodRatio){ #Random migration number is less than the food ratio so the mysis migrates. E.g. MD = 0.3 < FR = 0.7 so mysis migrates. This makes 1 a guarenteed migration
+                object@migrating = TRUE
+                
+                if (predationDraw > migrationRisk){ #The mysis evades predation
+                  object@energy = object@energy + 10 * foodRatio #add to the energy reserves an amount scaling to the food quality
+                
+                } else { #Mysis is eaten
+                  object@alive = FALSE
+                }
+                
+              } else { #The mysis didn't migrate
+                object@migrating = FALSE
+                
+                if (predationDraw > stayRisk){ #The mysis evades predation
+                  object@energy = object@energy + 10 * (1 - foodRatio) 
+                  
+                } else { #Mysis is eaten
+                  object@alive = FALSE
+                }
+              }
             }
             
-            object}
+            object} #Return the mysis
           )
 
 
 #---------------------------------------------------------------------------------------------
 #Model testing: 
 #---------------------------------------------------------------------------------------------
-#mysids = c(new("mysis", cals = 30), new("mysis", cals = 25) )
 
-#Function to initialize 1000 mysids with random (uniform between 5 and 30) calories. 
+#Function to initialize mysids with random (uniform between 5 and 30) energies. 
 
 mysids = NULL
-for (i in 1:10){
-  initialCals = sample(5:30,1)
-  mysids = c(mysids, new("mysis", cals = initialCals) )
+
+for (i in c(1)){
+#for (i in 1:10){
+  initialenergy = sample(5:30,1)
+  mysids = c(mysids, new("mysis", energy = initialenergy) )
 }
 
 allMigrations = NULL
-migrations = NULL
-counter = 1
-while (counter < (365*24)){
-  migrations = NULL
-  for (mysis in mysids){
-    mysis = nextTime(mysis, Temp_Response(counter))
-    migrations = c(migrations, mysis@migrating)
-    print(mysis)
+migrations    = NULL
+counter       = 1
+
+for (opposom in mysids){
+  for (i in 1:100){
+    opposom    = nextTime(opposom, 0.5)
+    migrations = c(migrations, opposom@migrating)
+    print(opposom)
   }
-  allMigrations = cbind(allMigrations, migrations)
-  counter = counter + 1
 }
+
 
