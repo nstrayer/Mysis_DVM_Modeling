@@ -18,3 +18,15 @@ __Next steps:__
 - Import the real light data. 
 - Probability of migrating goes from .9 to .1 from summer to winter. 
 - 
+
+distributions of food potential vary seasonally. 
+e.g.
+- mean is higher in summer
+- spring has higher deviation
+
+Get to jason: 
+- decision tree diagram __Done__
+- light levels __Done__
+- temperature levels
+- result of combining inside of model
+- seasonal fluctuations 

@@ -93,7 +93,7 @@ counter       = 1
 
 for (opposom in mysids){
   for (i in 1:100){
-    opposom    = nextTime(opposom, 0.5)
+    opposom    = nextTime(opposom, 0.8)
     migrations = c(migrations, opposom@migrating)
     print(opposom)
   }
