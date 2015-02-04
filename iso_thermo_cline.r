@@ -10,12 +10,12 @@ setwd("/Users/Nick/mysisModeling")
 #---------------------------------------------------------------------------------------------
 depthData = read.csv("thermoclineDepths.csv")$dist
 
-plot(-depthData[seq(12, length(lightLevels), 24)], type = "l", width = 3, frame.plot=T,axes=FALSE,
+plot(-depthData[seq(12, length(lightLevels), 24)], type = "l", frame.plot=T,axes=FALSE,ylim=c(-100,0),
      main = "Depth of 10 degrees Centigrade from Surface",
      xlab = "Day of Year",
      ylab = "Depth from Water Surface")
-axis(side = 1)
-axis(side = 1, col = "white", tcl = 0)
+axis(side = 1, at = c(0,50,100,150,200,250,300,350))
+axis(side = 1, col = "white", tcl = 0,at = c(0,50,100,150,200,250,300,350))
 axis(side = 2)
 axis(side = 2, col = "white", tcl = 0)
 
@@ -88,14 +88,14 @@ for (i in 1:365){
 
 suface = as.list(rep(0, 365))
 #plot it!
-plot(days, -depthLimit , type = "l", ylim = c(-40,5),
-     main = "Mysis Light Threshold from Surface",
+plot(days, -depthLimit , type = "l", ylim=c(-100,10),
+     main = "Mysis Migration Threshold from Surface",
      ylab = "Depth from Surface", 
      xlab = "Day of Year")
 #lines(days, -isocline)
-axis(side = 1)
-axis(side = 1, col = "white", tcl = 0)
+axis(side = 1, at = c(0,50,100,150,200,250,300,350))
+axis(side = 1, col = "white", tcl = 0,at = c(0,50,100,150,200,250,300,350))
 axis(side = 2)
 axis(side = 2, col = "white", tcl = 0)
-#polygon(c(-15,-15,380,380),c(-45,0,0,-45),col=rgb(0.1, .5, .85,0.3))
+polygon(c(-15,-15,380,380),c(-120,0,0,-120),col=rgb(0.1, .5, .85,0.3))
 

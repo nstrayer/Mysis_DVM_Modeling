@@ -27,6 +27,6 @@ e.g.
 Get to jason: 
 - decision tree diagram __Done__
 - light levels __Done__
-- temperature levels
-- result of combining inside of model
-- seasonal fluctuations 
+- temperature levels __Done__
+- result of combining inside of model __Done__
+- seasonal fluctuations  __Done__

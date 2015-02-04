@@ -21,7 +21,14 @@ axis(side = 2, col = "white", tcl = 0)
 
 
 #1 am
-nightLight = lightLevels[seq(5, length(lightLevels), 24)]
-plot(nightLight, type = "l", main = "Burlington Light Levels at Mid-Day for 1991", xlab = "Day of Year", ylab = "Light Levels in Wh/m^2")
-lines(smooth.spline(nightLight), col = "blue", lw = 4)
+nightLight = lightLevels[1:48]
+plot(nightLight, type = "l", 
+     main = "Burlington Light Levels Jan 1 - Jan 2", 
+     xlab = "Hour", 
+     ylab = "Light Levels in Wh/m^2")
+axis(side = 1)
+axis(side = 1, col = "white", tcl = 0)
+axis(side = 2)
+axis(side = 2, col = "white", tcl = 0)
+
 
