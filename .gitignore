@@ -1,3 +1,6 @@
 *.tex
 TSWL*
 .Rhistory
+figures/
+*.png
+*.jpg
