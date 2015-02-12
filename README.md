@@ -5,4 +5,4 @@ This repo contains the current code and notes on my senior thesis project at the
 
 # This is an adjustment
 
-$\frac{3x}{4y}$
+$$\frac{3x}{4y}$$
