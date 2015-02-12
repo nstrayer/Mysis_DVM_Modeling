@@ -21,4 +21,4 @@ for (day in days){
 
 plot(days,foodAvail, type = "l")
 
-write.csv(foodAvail, "data/foodAvailDay.csv", row.names=FALSE)
+write.csv(foodAvail, "data/FoodAvail_Day.csv", row.names=FALSE)

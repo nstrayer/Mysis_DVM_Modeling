@@ -1,14 +1,12 @@
 setwd("/Users/Nick/mysisModeling")
-
-# Thus begins the mysis model. 
-# Functions that drive the model are written in the form Foo_Foo
-# Variables that go into the model are writtenin camelCase. E.g. fooFoo. 
+#This script contains the model for determining the extent of migration. 
+#Be warned that it spits out lots of files and is meant to be run piece by piece (or not, but youll muck up your directory)
 
 #Let's bring in the thermocline depth data
 #---------------------------------------------------------------------------------------------
 #Bringing in outside data: 
 #---------------------------------------------------------------------------------------------
-depthData = read.csv("thermoclineDepths.csv")$dist
+depthData = read.csv("data/Depth_Thermocline_Hour.csv")$dist
 
 plot(-depthData[seq(12, length(lightLevels), 24)], type = "l", frame.plot=T,axes=FALSE,ylim=c(-100,0),
      main = "Depth of 10 degrees Centigrade from Surface",
@@ -33,8 +31,7 @@ lightDepth = function(surfaceLight){
   return(distance)
 }
 
-#30 day cycle
-#days = 1:30
+#Days vector for a year
 days = 1:365
 
 #Nightime light level in lux
@@ -55,6 +52,7 @@ axis(side = 1, col = "white", tcl = 0)
 axis(side = 2)
 axis(side = 2, col = "white", tcl = 0)
 
+
 #Now we will run our light depth function over this: 
 isocline = NULL
 for (day in lightLevel){
@@ -71,6 +69,9 @@ axis(side = 1, col = "white", tcl = 0)
 axis(side = 2)
 axis(side = 2, col = "white", tcl = 0)
 
+#Now that we like the data let's save it for later consumption.
+write.csv(isocline, "data/Depth_MoonLight_Day.csv", row.names=FALSE)
+
 #Now let's grab some of our depth data real quick: 
 smallDepthData = NULL
 for (i in seq(1,24*365, 24)){
@@ -86,7 +87,8 @@ for (i in 1:365){
   }
 }
 
-suface = as.list(rep(0, 365))
+write.csv(depthLimit, "data/Depth_MoonLightThermocline_Day.csv", row.names=FALSE)
+
 #plot it!
 plot(days, -depthLimit , type = "l", ylim=c(-100,10),
      main = "Mysis Migration Threshold from Surface",

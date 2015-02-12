@@ -81,8 +81,8 @@ setMethod("nextTime","mysis",
 
 mysids = NULL
 
-for (i in c(1)){
-#for (i in 1:10){
+#for (i in c(1)){
+for (i in 1:10){
   initialenergy = sample(5:30,1)
   mysids = c(mysids, new("mysis", energy = initialenergy) )
 }

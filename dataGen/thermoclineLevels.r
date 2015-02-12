@@ -24,7 +24,7 @@ for (t in time){ dist = c(dist, thermoclineDist(t)) }
 
 
 data = cbind(time, dist)
-write.csv(data, "thermoclineDepths.csv", row.names=FALSE)
+write.csv(data, "data/Depth_Thermocline_Hour.csv", row.names=FALSE)
 
 head(data)
 plot(time,dist)
