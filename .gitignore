@@ -4,3 +4,5 @@ TSWL*
 figures/
 *.png
 *.jpg
+.Rhistory
+.RData
