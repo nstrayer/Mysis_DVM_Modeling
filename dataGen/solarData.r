@@ -21,7 +21,7 @@ png("LightLevels_noon_2010.png")
 
 
 #1 am
-nightLight = lightLevels[1:48]
+nightLight = lightLevels[1000:1048]
 plot(nightLight, type = "l", 
      main = "Burlington Light Levels Jan 1 - Jan 2", 
      xlab = "Hour", 
