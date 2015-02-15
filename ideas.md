@@ -30,3 +30,9 @@ Get to jason:
 - temperature levels __Done__
 - result of combining inside of model __Done__
 - seasonal fluctuations  __Done__
+
+
+Paper on the luminous efficiency of daylight: 
+http://lrt.sagepub.com/content/17/4/162.short
+
+“70-105 Lm/W”
