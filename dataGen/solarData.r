@@ -57,7 +57,7 @@ axis(side = 2, col = "white", tcl = 0)
 
 
 #This comes from the solar irradiance paper. Very iffy. 
-Wh_to_lumen = 85.0;
+Wh_to_lumen = 120.0; #From Jensen et all. 
 combinedLight = NULL;
 solarLux = NULL;
 
