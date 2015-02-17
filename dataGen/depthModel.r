@@ -8,15 +8,7 @@ setwd("/Users/Nick/mysisModeling")
 #---------------------------------------------------------------------------------------------
 depthData = read.csv("data/Depth_Thermocline_Hour.csv")$dist
 
-plot(-depthData[seq(12, length(lightLevels), 24)], type = "l", frame.plot=T,axes=FALSE,ylim=c(-100,0),
-     main = "Depth of 10 degrees Centigrade from Surface",
-     xlab = "Day of Year",
-     ylab = "Depth from Water Surface")
-axis(side = 1, at = c(0,50,100,150,200,250,300,350))
-axis(side = 1, col = "white", tcl = 0,at = c(0,50,100,150,200,250,300,350))
-axis(side = 2)
-axis(side = 2, col = "white", tcl = 0)
-
+plot(depthData) #Just check to make sure the data is in properly. 
 
 #---------------------------------------------------------------------------------------------
 #Depth of light threshold function: 
@@ -31,46 +23,56 @@ lightDepth = function(surfaceLight){
   return(distance)
 }
 
-#Days vector for a year
-days = 1:365
+# 
+# #Days vector for a year
+# days = 1:365
+# 
+# #Nightime light level in lux
+# lightLevel = NULL
+# 
+# for (day in days){
+#   cyclePoint = day %% 27
+#   lightLevel = c(lightLevel, 0.5 * cos((1/27)* 2*pi * cyclePoint ) + .5)
+# }
 
-#Nightime light level in lux
-lightLevel = NULL
+#
+#Bring in data from solarData.r! 
+#
 
-for (day in days){
-  cyclePoint = day %% 27
-  lightLevel = c(lightLevel, 0.5 * cos((1/27)* 2*pi * cyclePoint ) + .5)
-}
-
-#Check to see if this is functional
-plot(days, lightLevel, type = "l",
-     main = "Light Levels at Midnight (Moon Cycle)",
-     xlab = "Day of Year",
-     ylab = "Light Level in Lumens")
-axis(side = 1)
-axis(side = 1, col = "white", tcl = 0)
-axis(side = 2)
-axis(side = 2, col = "white", tcl = 0)
+lightData = read.csv("data/light_day_moon_hour.csv_hour.csv")$x
+hours = 1:(365*24)
+  
+  #Check to see if this is functional
+plot(hours, lightData, type = "l",
+       main = "Light Levels at Midnight (Moon Cycle)",
+       xlab = "Day of Year",
+       ylab = "Light Level in Lumens")
+  axis(side = 1)
+  axis(side = 1, col = "white", tcl = 0)
+  axis(side = 2)
+  axis(side = 2, col = "white", tcl = 0)
 
 
 #Now we will run our light depth function over this: 
 isocline = NULL
-for (day in lightLevel){
-  if (day == 0){
+for (hour in lightData){
+  if (hour == 0){
     isocline = c(isocline, 0) #logs dont play nice with 0s
   } else {
-    isocline = c(isocline, lightDepth(day))
+    isocline = c(isocline, lightDepth(hour))
   }
 }
 #Check to see if this is functional
-plot(days, isocline, type = "l")
+plot(-isocline, type = "l",
+                xlab = "Depth of Isocline",
+                ylab = "Hour")
 axis(side = 1)
 axis(side = 1, col = "white", tcl = 0)
 axis(side = 2)
 axis(side = 2, col = "white", tcl = 0)
 
 #Now that we like the data let's save it for later consumption.
-write.csv(isocline, "data/Depth_MoonLight_Day.csv", row.names=FALSE)
+#write.csv(isocline, "data/Depth_MoonLight_Day.csv", row.names=FALSE)
 
 #Now let's grab some of our depth data real quick: 
 smallDepthData = NULL
@@ -87,7 +89,7 @@ for (i in 1:365){
   }
 }
 
-write.csv(depthLimit, "data/Depth_MoonLightThermocline_Day.csv", row.names=FALSE)
+#write.csv(depthLimit, "data/Depth_MoonLightThermocline_Day.csv", row.names=FALSE)
 
 #plot it!
 plot(days, -depthLimit , type = "l", ylim=c(-100,10),
