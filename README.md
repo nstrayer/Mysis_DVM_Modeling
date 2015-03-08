@@ -36,4 +36,7 @@ If the mysis is alive and migrating then reach into the mysocline
 
 # File Structure: 
 
-__depthModel(_md)__ : Takes in data from `solarData.r` and spits out the file `mysocline_hour.csv` that contains 
+__depthModel(_md)__ : Takes in data from `solarData.r` and spits out the file `mysocline_hour.csv` that contains the expected migration extent at any given hour of the year. 
+
+__solarData.r__ : Reads in raw solar data and combines with modeled lunar cycle to create light intensity estimates for any given hour of the year. 
+
