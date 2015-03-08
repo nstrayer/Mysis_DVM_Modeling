@@ -6,18 +6,18 @@ solarRaw = read.csv("data/solarData2010.csv")
 realSolar = solarRaw$METSTAT.Dif..Wh.m.2.
 realSolarSmoothed = smooth.spline(realSolar)
 
-plot(realSolarSmoothed, type = "l")
-plot(realSolar, type = "l")
+# plot(realSolarSmoothed, type = "l")
+# plot(realSolar, type = "l")
 
 #Mid day
 lightAtNoon = realSolar[seq(12, length(realSolar), 24)]
-plot(lightAtNoon, type = "l", main = "Burlington Light Levels at Mid-Day for 2010", xlab = "Day of Year", ylab = "Light Levels in Wh/m^2")
-lines(smooth.spline(lightAtNoon), col = "blue", lw = 4)
-axis(side = 1)
-axis(side = 1, col = "white", tcl = 0)
-axis(side = 2)
-axis(side = 2, col = "white", tcl = 0)
-png("realSolar_noon_2010.png")
+# plot(lightAtNoon, type = "l", main = "Burlington Light Levels at Mid-Day for 2010", xlab = "Day of Year", ylab = "Light Levels in Wh/m^2")
+# lines(smooth.spline(lightAtNoon), col = "blue", lw = 4)
+# axis(side = 1)
+# axis(side = 1, col = "white", tcl = 0)
+# axis(side = 2)
+# axis(side = 2, col = "white", tcl = 0)
+# png("realSolar_noon_2010.png")
 
 
 # #1 am
@@ -46,14 +46,14 @@ for (hour in hours){
 }
 
 #Check to see if this is functional
-plot(hours, moonLux, type = "l",
-     main = "Light Levels at Midnight (Moon Cycle)",
-     xlab = "hour",
-     ylab = "Light Level in Lumens")
-axis(side = 1)
-axis(side = 1, col = "white", tcl = 0)
-axis(side = 2)
-axis(side = 2, col = "white", tcl = 0)
+# plot(hours, moonLux, type = "l",
+#      main = "Light Levels at Midnight (Moon Cycle)",
+#      xlab = "hour",
+#      ylab = "Light Level in Lumens")
+# axis(side = 1)
+# axis(side = 1, col = "white", tcl = 0)
+# axis(side = 2)
+# axis(side = 2, col = "white", tcl = 0)
 
 
 #This comes from the solar irradiance paper. Very iffy. 
@@ -63,7 +63,7 @@ solarLux = NULL;
 
 for (i in 1:(365*24)){
   solarLux = realSolar[i] * Wh_to_lumen;
-  print(solarLux > moonLux[i])
+  #print(solarLux > moonLux[i])
   if (solarLux > moonLux[i]){
     combinedLight = c(combinedLight, solarLux)
   } else {
@@ -76,4 +76,4 @@ for (i in 1:(365*24)){
 summary(combinedLight)
 #Yup! Okay, let's output it. 
 
-write.csv(combinedLight, "data/light_day_moon_hour.csv_hour.csv", row.names=FALSE)
+write.csv(combinedLight, "data/light_day_moon_hour.csv", row.names=FALSE)

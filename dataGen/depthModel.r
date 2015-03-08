@@ -8,10 +8,11 @@ setwd("/Users/Nick/mysisModeling")
 #---------------------------------------------------------------------------------------------
 depthData = read.csv("data/Depth_Thermocline_Hour.csv")$dist
 
-plot(depthData) #Just check to make sure the data is in properly. 
+#plot(depthData) #Just check to make sure the data is in properly. 
 
 #---------------------------------------------------------------------------------------------
 #Depth of light threshold function: 
+#See brainstorm.pdf for details
 #---------------------------------------------------------------------------------------------
 lightDepth = function(surfaceLight){
   
@@ -39,7 +40,7 @@ lightDepth = function(surfaceLight){
 #Bring in data from solarData.r! 
 #
 
-lightData = read.csv("data/light_day_moon_hour.csv_hour.csv")$x
+lightData = read.csv("data/light_day_moon_hour.csv")$x
 hours = 1:(365*24)
   
   #Check to see if this is functional
@@ -62,21 +63,28 @@ for (hour in lightData){
     isocline = c(isocline, lightDepth(hour))
   }
 }
-#Check to see if this is functional
-plot(-isocline, type = "l",
-                xlab = "Depth of Isocline",
-                ylab = "Hour")
-axis(side = 1)
-axis(side = 1, col = "white", tcl = 0)
-axis(side = 2)
-axis(side = 2, col = "white", tcl = 0)
+#Check to see if this is functional, ggplot2 style. 
+
+isoclineDf = as.data.frame(cbind(hours, isocline))
+ggplot(isoclineDf, aes(x = hours, y = -isocline)) + geom_line()
+
+#old style. 
+# plot(-isocline, type = "l",
+#                 ylab = "Depth of Isocline",
+#                 xlab = "Hour")
+# axis(side = 1)
+# axis(side = 1, col = "white", tcl = 0)
+# axis(side = 2)
+# axis(side = 2, col = "white", tcl = 0)
+
 
 #Now that we like the data let's save it for later consumption.
 #write.csv(isocline, "data/Depth_MoonLight_Day.csv", row.names=FALSE)
 
+
 #Now let's grab some of our depth data real quick: 
 smallDepthData = NULL
-for (i in seq(1,24*365, 24)){
+for (i in seq(1, 24*365, 24)){
   smallDepthData = c(smallDepthData, depthData[i])
 }
 
@@ -89,7 +97,7 @@ for (i in 1:365){
   }
 }
 
-#write.csv(depthLimit, "data/Depth_MoonLightThermocline_Day.csv", row.names=FALSE)
+write.csv(depthLimit, "data/Depth_combined_hour.csv", row.names=FALSE)
 
 #plot it!
 plot(days, -depthLimit , type = "l", ylim=c(-100,10),
@@ -101,5 +109,6 @@ axis(side = 1, at = c(0,50,100,150,200,250,300,350))
 axis(side = 1, col = "white", tcl = 0,at = c(0,50,100,150,200,250,300,350))
 axis(side = 2)
 axis(side = 2, col = "white", tcl = 0)
-polygon(c(-15,-15,380,380),c(-120,0,0,-120),col=rgb(0.1, .5, .85,0.3))
+#polygon(c(-15,-15,380,380),c(-120,0,0,-120),col=rgb(0.1, .5, .85,0.3))
+
 

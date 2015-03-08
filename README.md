@@ -28,3 +28,12 @@ It is of note that a lot of manipulation is being done for the units of light. T
 
 [1] Paper on the luminous efficiency of daylight: 
 http://lrt.sagepub.com/content/17/4/162.short
+
+
+# Depth component: 
+
+If the mysis is alive and migrating then reach into the mysocline 
+
+# File Structure: 
+
+__depthModel(_md)__ : Takes in data from `solarData.r` and spits out the file `mysocline_hour.csv` that contains 
