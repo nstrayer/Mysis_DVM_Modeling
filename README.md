@@ -2,6 +2,14 @@
 
 This repo contains the current code and notes on my senior thesis project at the University of Vermont.
 
+# R Markdown Scripts: 
+
+These are markdown style scripts detailing the workings of the components of the model. All are hosted on [RPubs](http://rpubs.com). 
+
+
+- [Solar Data Cleaning](http://rpubs.com/nstrayer/64339)
+
+- [Mysocline Depth Model](http://rpubs.com/nstrayer/64310)
 
 # General scratchwork for the model: 
 
