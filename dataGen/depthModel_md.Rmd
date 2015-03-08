@@ -2,7 +2,11 @@
 title: "DepthModel"
 author: "Nick Strayer"
 date: "March 7, 2015"
-output: html_document
+output:
+  html_document:
+    fig_width: 9
+---
+
 ---
 
 Just getting some initializing stuff out of the way and bring in some outside data that was generated in `thermoclineLevels.r` and `solarData.r`:
@@ -15,9 +19,20 @@ lightData = read.csv("data/light_day_moon_hour.csv")$x
 hours = 1:(365*24)
 ```
 
-## Mysocline model: 
+Do a quick plot to make sure the data came in properly: 
+
+```{r fig.align= 'center'}
+lightDataDf = as.data.frame(cbind(hours, lightData))
+m = ggplot(lightDataDf, aes(x = hours, y = lightData)) + geom_line() 
+m + labs(title = "Light intensity levels by hour", x = "hour", y = "light intensity")
+```
+
+## Mylux limit model: 
 
 Now we code put in the model for depth at mylux intensity limit. 
+
+Distance of light threshold:  $f(I_o) = \frac{1}{k}(ln(I_o)  - ln(I_x))$
+
 ```{r}
 lightDepth = function(surfaceLight){
   
@@ -25,20 +40,16 @@ lightDepth = function(surfaceLight){
   I_x = 0.001 #Mysis light threshold (paper quotes between 10^-2 and 10^-4)
   
   distance = (1/k) * (log(surfaceLight) - log(I_x))
+  if (distance < 0){ distance = 0 }
   return(distance)
 }
 
 ```
 
-## Do a quick plot to make sure the code is correct: 
-```{r}
-lightDataDf = as.data.frame(cbind(hours, lightData))
-m = ggplot(lightDataDf, aes(x = hours, y = lightData)) + geom_line() 
-m + labs(title = "Light intensity levels by hour", x = "hour", y = "light intensity")
-```
 
-### Now we will run the raw data through our light depth function and plot: 
-```{r}
+## Mylux limit depth
+Now we will run the raw data through our light depth function and plot: 
+```{r fig.align= 'center'}
 isocline = NULL
 for (hour in lightData){
   if (hour == 0){
@@ -49,12 +60,14 @@ for (hour in lightData){
 }
 
 isoclineDf = as.data.frame(cbind(hours, isocline))
-ggplot(isoclineDf, aes(x = hours, y = -isocline)) + geom_line()
+m = ggplot(isoclineDf, aes(x = hours, y = -isocline)) + geom_line()
+m + labs(title = "Depth of Mylux Limit", x = "hour", y = "depth from surface")
 ```
 
-Now we combine the isocline data with the thermocline data to get the mysocline and output to file: 
+## Mysocline
+Combining the isocline with the thermocline to get the mysocline and output to file: 
 
-```{r}
+```{r fig.align= 'center'}
 mysocline = NULL
 for (i in 1:(24*365)){
   if (depthData[i] > isocline[i]){
@@ -65,7 +78,8 @@ for (i in 1:(24*365)){
 }
 
 mysoclineDf = as.data.frame(cbind(hours, mysocline))
-ggplot(isoclineDf, aes(x = hours, y = -mysocline)) + geom_line()
+m = ggplot(isoclineDf, aes(x = hours, y = -mysocline)) + geom_line()
+m + labs(title = "Depth of Mysocline", x = "hour", y = "depth from surface")
 #write.csv(mysocline, "data/mysocline_hour.csv", row.names=FALSE)
 ```
 
