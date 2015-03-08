@@ -12,7 +12,7 @@ output:
 
 ```{r}
 setwd("/Users/Nick/mysisModeling")
-solarRaw = read.csv("data/solarData2010.csv")
+solarRaw = read.csv("outsideData/solarData2010.csv")
 realSolar = solarRaw$METSTAT.Dif..Wh.m.2.
 ```
 

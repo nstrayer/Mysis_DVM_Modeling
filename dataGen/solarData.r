@@ -1,7 +1,7 @@
 setwd("/Users/Nick/mysisModeling")
 
 #Data comes from http://rredc.nrel.gov/solar/old_data/nsrdb/1991-2010/
-solarRaw = read.csv("data/solarData2010.csv")
+solarRaw = read.csv("outsideData/solarData2010.csv")
 
 realSolar = solarRaw$METSTAT.Dif..Wh.m.2.
 

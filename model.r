@@ -3,10 +3,23 @@ setwd("/Users/Nick/mysisModeling")
 # Functions that drive the model are written in the form Foo_Foo
 # Variables that go into the model are writtenin camelCase. E.g. fooFoo. 
 
+#First we are going to check for the existance of some data and if it isnt there, generate it. 
+
+#Check for solar data
+if(!file.exists("data/light_day_moon_hour.csv")){ source("dataGen/solarData.r") } 
+
+#Check for thermocline data
+if(!file.exists("data/Depth_Thermocline_Hour.csv")){ source("dataGen/thermoclineLevels.r") } 
+
+#Mysocline data
+if(!file.exists("data/mysocline_hour.csv")){ source("dataGen/depthModel.r") }
+
+
+
 #---------------------------------------------------------------------------------------------
 #Read in depth data: 
 #---------------------------------------------------------------------------------------------
-depthData = read.csv("data/Depth_combined_hour.csv")
+depthData = read.csv("data/mysocline_hour.csv")$x
 
 #---------------------------------------------------------------------------------------------
 #Class and method declarations: 
@@ -42,7 +55,7 @@ setMethod("show", "mysis",
 #pre-defined nextTime method for any other R classes. Then we set the method. 
 setGeneric( "nextTime", function(object, ...){standardGeneric("nextTime")})
 setMethod("nextTime","mysis", 
-          function(object, foodRatio){       #Takes in the mysis object and the ratio of food quality at a given time. 
+          function(object, foodRatio, time){       #Takes in the mysis object and the ratio of food quality at a given time. 
             
             #Lets set some constants real quick: 
             migrationRisk = 0.001      #Chance of being eaten if migrating
@@ -53,15 +66,14 @@ setMethod("nextTime","mysis",
             
             #Here is the decision tree:
             if (object@alive){ #If the mysis is alive let's run the decision tree
-              
-              # object@depth =   #have a way to grab depth for a given hour. 
-              
+                            
 ########################################################################################################################################################################
 #Random migration number is less than the food ratio so the mysis migrates. E.g. MD = 0.3 < FR = 0.7 so mysis migrates. This makes 1 a guarenteed migration
   
               if (migrationDraw < foodRatio){ 
                 object@migrating = TRUE
-                object@depth = 
+                object@depth = depthData[time] #Grab the mysocline limit at this hour 
+                
                 if (predationDraw > migrationRisk){ #The mysis evades predation
                   object@energy = object@energy + 10 * foodRatio #add to the energy reserves an amount scaling to the food quality
                 
@@ -71,6 +83,7 @@ setMethod("nextTime","mysis",
                 
               } else { #The mysis didn't migrate
                 object@migrating = FALSE
+                object@depth = 100
                 
                 if (predationDraw > stayRisk){ #The mysis evades predation
                   object@energy = object@energy + 10 * (1 - foodRatio) 
@@ -98,16 +111,17 @@ for (i in 1:5){
   mysids = c(mysids, new("mysis", energy = initialenergy) )
 }
 
-allMigrations = NULL
-migrations    = NULL
-counter       = 1
+
+migrations = NULL
 
 for (mysid in mysids){ #loop through the mysis
+  migration = NULL 
   for (i in 1:(24*15)){
-    mysid    = nextTime(mysid, 0.8)
-    migrations = c(migrations, mysid@migrating)
+    mysid    = nextTime(mysid, 0.8, i)
+    migration = c(migration, mysid@depth)
     print(mysid)
   }
-}
+  migrations = cbind(migrations, migration) # add to the object of migrations. 
+} 
 
 
