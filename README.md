@@ -9,6 +9,8 @@ These are markdown style scripts detailing the workings of the components of the
 
 - [Solar Data Cleaning](http://rpubs.com/nstrayer/64339)
 
+- [Thermocline Model](http://rpubs.com/nstrayer/thermoclineModel)
+
 - [Mysocline Depth Model](http://rpubs.com/nstrayer/64310)
 
 # General scratchwork for the model: 
