@@ -14,21 +14,17 @@ These are markdown style scripts detailing the workings of the components of the
 	
 	- [Mysocline Depth Model](http://rpubs.com/nstrayer/64310)
 
-# General scratchwork for the model: 
+# Potential paths: 
 
-Potentially look at female reproductive stage. 
-
-Figure out light an temp thresholds through whole year. 
-
-Just get the model to be where the mysis gets to based upon lowest light or temp profile. 
-
-Mysis start migrating at sundown and go back at sunrise. 
+* Potentially look at female reproductive stage. 
 
 
-## distributions of food potential vary seasonally. 
-e.g.
-- mean is higher in summer
-- spring has higher deviation
+# To Do: 
+
+* Distributions of food potential vary seasonally. 
+	e.g.
+	- mean is higher in summer
+	- spring has higher deviation
 
 
 
@@ -40,14 +36,4 @@ It is of note that a lot of manipulation is being done for the units of light. T
 [1] Paper on the luminous efficiency of daylight: 
 http://lrt.sagepub.com/content/17/4/162.short
 
-
-# Depth component: 
-
-If the mysis is alive and migrating then reach into the mysocline 
-
-# File Structure: 
-
-__depthModel(_md)__ : Takes in data from `solarData.r` and spits out the file `mysocline_hour.csv` that contains the expected migration extent at any given hour of the year. 
-
-__solarData.r__ : Reads in raw solar data and combines with modeled lunar cycle to create light intensity estimates for any given hour of the year. 
 
