@@ -2,16 +2,17 @@
 
 This repo contains the current code and notes on my senior thesis project at the University of Vermont.
 
-# R Markdown Scripts: 
+# R Markdown Scripts / Structure: 
 
 These are markdown style scripts detailing the workings of the components of the model. All are hosted on [RPubs](http://rpubs.com). 
 
+- [Main Model](http://rpubs.com/nstrayer/mainModel): This is the script that drives the whole process. It calls out to the following scripts in the `dataGen/` folder to generate data. 
 
-- [Solar Data Cleaning](http://rpubs.com/nstrayer/64339)
+	- [Solar Data Cleaning](http://rpubs.com/nstrayer/64339)
 
-- [Thermocline Model](http://rpubs.com/nstrayer/thermoclineModel)
-
-- [Mysocline Depth Model](http://rpubs.com/nstrayer/64310)
+	- [Thermocline Model](http://rpubs.com/nstrayer/thermoclineModel)
+	
+	- [Mysocline Depth Model](http://rpubs.com/nstrayer/64310)
 
 # General scratchwork for the model: 
 

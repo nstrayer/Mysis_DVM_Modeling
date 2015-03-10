@@ -1,9 +1,33 @@
-setwd("/Users/Nick/mysisModeling")
-# Thus begins the mysis model. 
-# Functions that drive the model are written in the form Foo_Foo
-# Variables that go into the model are writtenin camelCase. E.g. fooFoo. 
+---
+title: "Main Model"
+author: "Nick Strayer"
+date: "March 8, 2015"
+output:
+  html_document:
+    fig_height: 6
+    fig_width: 9
+---
 
-#First we are going to check for the existance of some data and if it isnt there, generate it. 
+```{r echo=FALSE}
+library(ggplot2)
+setwd("/Users/Nick/mysisModeling") #Doesnt actually do anything in chunks.
+```
+---
+
+## Check for the existance of needed datafiles. 
+
+If the files are not present, then run their corresponding scripts and generate them. 
+
+The corresponding R Markdown scripts associated with these files can be found on RPub: 
+
+  - [Solar Data Cleaning](http://rpubs.com/nstrayer/64339)
+  
+  - [Thermocline Model](http://rpubs.com/nstrayer/thermoclineModel)
+
+  - [Mysocline Depth Model](http://rpubs.com/nstrayer/64310)
+
+```{r}
+setwd("/Users/Nick/mysisModeling") #Locate ourselves in the computer. 
 
 #Check for solar data
 if(!file.exists("data/light_day_moon_hour.csv")){ source("dataGen/solarData.r") } 
@@ -14,18 +38,19 @@ if(!file.exists("data/Depth_Thermocline_Hour.csv")){ source("dataGen/thermocline
 #Mysocline data
 if(!file.exists("data/mysocline_hour.csv")){ source("dataGen/depthModel.r") }
 
-
-
-#---------------------------------------------------------------------------------------------
-#Read in depth data: 
-#---------------------------------------------------------------------------------------------
+#Read in the data now. 
 depthData = read.csv("data/mysocline_hour.csv")$x
+```
 
-#---------------------------------------------------------------------------------------------
-#Class and method declarations: 
-#---------------------------------------------------------------------------------------------
+## Class and method declarations: 
 
-# testing object based r coding: 
+I have chosen to use the S4 object oriented programing style. The details are minor but more info can be found [here](https://www.stat.auckland.ac.nz/~stat782/downloads/08-Objects.pdf). 
+
+### Set up the mysis class: 
+
+This basically is a digital mysis that simplistically holds a couple of peices of information and upon which the model will act. 
+
+```{r}
 setClass("mysis",
          representation(
            energy    = "numeric",    # The energy reserves are a numeric value
@@ -39,7 +64,7 @@ setClass("mysis",
            depth     = 100),         # and at the bottom.  
          )
 
-#Set the show method, basically how we want the program to display the info about the mysis on calling. This is neccesary due to R's quirks
+#Set the show method, basically how we want the program to display the info about the mysis on calling. 
 setMethod("show", "mysis", 
           function(object){
             if (object@alive){
@@ -51,8 +76,19 @@ setMethod("show", "mysis",
             }
           })
 
-#Making an a function to step the mysids through time, first we initialize a generic method as there is no
-#pre-defined nextTime method for any other R classes. Then we set the method. 
+```
+
+### The decision tree model: 
+
+This is a stochastic model, meaning it utilizes randomness to simulate the real world. 
+
+The function of the decision tree is such: 
+
+- Draw random number to decide if migrating: 
+  - If the number drawn is above the ratio needed to migrate (food ratio) then the mysis migrates. 
+    - After migration is decided, another draw is done to see if the mysis is killed by predation. 
+    
+```{r}
 setGeneric( "nextTime", function(object, ...){standardGeneric("nextTime")})
 setMethod("nextTime","mysis", 
           function(object, foodRatio, time){       #Takes in the mysis object and the ratio of food quality at a given time. 
@@ -66,9 +102,6 @@ setMethod("nextTime","mysis",
             
             #Here is the decision tree:
             if (object@alive){ #If the mysis is alive let's run the decision tree
-                            
-########################################################################################################################################################################
-#Random migration number is less than the food ratio so the mysis migrates. E.g. MD = 0.3 < FR = 0.7 so mysis migrates. This makes 1 a guarenteed migration
   
               if (migrationDraw < foodRatio){ 
                 object@migrating = TRUE
@@ -96,32 +129,47 @@ setMethod("nextTime","mysis",
             object} #Return the mysis
           )
 
+```
 
-#---------------------------------------------------------------------------------------------
-#Model testing: 
-#---------------------------------------------------------------------------------------------
 
-#Function to initialize mysids with random (uniform between 5 and 30) energies. 
+### Testing it: 
 
+Now that the model is all set up can run it over a small subset of the eventual numbers (~10,000 mysids over 8,700 hours) and see what results we get. 
+
+```{r}
 mysids = NULL
+numOfMysids = 5
 
-#for (i in c(1)){
-for (i in 1:5){
-  initialenergy = sample(5:30,1)
+for (i in 1:numOfMysids){
+  initialenergy = sample(5:30,1) #draw initial energy from normal dist centered at 30 with stdev of 5. 
   mysids = c(mysids, new("mysis", energy = initialenergy) )
 }
+```
 
+... and now we can run the model on those mysids: 
 
+```{r}
 migrations = NULL
-
+hours = 1:(24*10)
 for (mysid in mysids){ #loop through the mysis
   migration = NULL 
-  for (i in 1:(24*15)){
+  for (i in hours){
     mysid    = nextTime(mysid, 0.8, i)
     migration = c(migration, mysid@depth)
-    print(mysid)
   }
   migrations = cbind(migrations, migration) # add to the object of migrations. 
 } 
+```
 
-plot(migrations[,1])
+## What do we have?
+
+Let's plot this small run to see what kind of behavior we are getting. 
+
+```{r echo=FALSE}
+migrations = cbind(migrations, hours)
+
+migrationsDf = as.data.frame(migrations)
+colnames(migrationsDf) = c("mysis1", "mysis2", "mysis3", "mysis4", "mysis5","hours")
+ggplot(migrationsDf, aes(y = -mysis1, x = hours)) + geom_line() + 
+  labs(title = "Mysis migration patterns for first 10 days of year", x = "Depth below surface")
+```
