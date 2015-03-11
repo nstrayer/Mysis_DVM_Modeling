@@ -3,9 +3,10 @@ setwd("/Users/Nick/mysisModeling")
 # in the summer. 
 
 #First we set up some user defined variables. 
-min       = 0.1 #minimum food availability value
-max       = 0.9 #max 
-highDay   = 226 #Number of days into the year that the max food availability is (226 is aug 15)
+min     = 0.1 #minimum food availability value
+max     = 0.9 #max 
+highDay = 226 #Number of days into the year that the max food availability is (226 is aug 15)
+august  = 5856 #hours into the year
 
 #Now we generate the others
 scaler    = (max - min)/2 #range divided by two

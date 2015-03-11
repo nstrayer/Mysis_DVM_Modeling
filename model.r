@@ -1,4 +1,5 @@
 setwd("/Users/Nick/mysisModeling")
+library(ggplot2)
 # Thus begins the mysis model. 
 # Functions that drive the model are written in the form Foo_Foo
 # Variables that go into the model are writtenin camelCase. E.g. fooFoo. 
@@ -13,7 +14,6 @@ if(!file.exists("data/Depth_Thermocline_Hour.csv")){ source("dataGen/thermocline
 
 #Mysocline data
 if(!file.exists("data/mysocline_hour.csv")){ source("dataGen/depthModel.r") }
-
 
 
 #---------------------------------------------------------------------------------------------
@@ -113,10 +113,10 @@ for (i in 1:5){
 
 
 migrations = NULL
-
+hours = 1:(24*10)
 for (mysid in mysids){ #loop through the mysis
   migration = NULL 
-  for (i in 1:(24*15)){
+  for (i in hours){
     mysid    = nextTime(mysid, 0.8, i)
     migration = c(migration, mysid@depth)
     print(mysid)
@@ -124,4 +124,10 @@ for (mysid in mysids){ #loop through the mysis
   migrations = cbind(migrations, migration) # add to the object of migrations. 
 } 
 
-plot(migrations[,1])
+migrations = cbind(migrations, hours)
+
+migrationsDf = as.data.frame(migrations)
+colnames(migrationsDf) = c("mysis1", "mysis2", "mysis3", "mysis4", "mysis5","hours")
+ggplot(migrationsDf, aes(y = -mysis1, x = hours)) + geom_line() + 
+  labs(title = "Mysis migration patterns for first 10 days of year", x = "Depth below surface")
+
