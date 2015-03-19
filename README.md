@@ -50,4 +50,9 @@ http://lrt.sagepub.com/content/17/4/162.short
 2. Multiplicative probability. 
 	- Has the potential to drive most mysids to not migrate. 
 
+## Form:
+
+1. Am I going or staying based food avail curve 
+2. If going, draw number from logistic curve, decide based upon that number. 
+
 
