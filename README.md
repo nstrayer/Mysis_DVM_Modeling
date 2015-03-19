@@ -45,7 +45,9 @@ http://lrt.sagepub.com/content/17/4/162.short
 ## 2 options: 
 
 1. Additive probability.
+	- Could potentially force too many to migrate. 
 
 2. Multiplicative probability. 
+	- Has the potential to drive most mysids to not migrate. 
 
 
