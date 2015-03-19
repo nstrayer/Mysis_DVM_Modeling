@@ -120,11 +120,12 @@ setMethod("nextTime","mysis",
             goodCondition  = object@energy > energyThreshold #will return true if high condition, false if low. 
             
             if (goodCondition){ #if the mysis is in good condition use standard migration chance, if bad use 1 - chance
-              object@migrating = migrationDraw < foodRatio
+              object@migrating = migrationDraw > foodRatio
             } else {
-              object@migrating = migrationDraw < ( 1 - foodRatio)
+              object@migrating = migrationDraw > ( 1 - foodRatio)
             }
             
+        
             #Here is the decision tree:
             if (object@alive){ #If the mysis is alive let's run the decision tree
   

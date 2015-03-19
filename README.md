@@ -40,4 +40,12 @@ It is of note that a lot of manipulation is being done for the units of light. T
 [1] Paper on the luminous efficiency of daylight: 
 http://lrt.sagepub.com/content/17/4/162.short
 
+# Choice to migrate: 
+
+## 2 options: 
+
+1. Additive probability.
+
+2. Multiplicative probability. 
+
 
