@@ -26,6 +26,10 @@ These are markdown style scripts detailing the workings of the components of the
 	- mean is higher in summer
 	- spring has higher deviation
 
+* Change the desire to migrate higher if the mysis is already migrated. This will prevent them from bouncing up and down multiple times a night. 
+
+
+
 
 
 

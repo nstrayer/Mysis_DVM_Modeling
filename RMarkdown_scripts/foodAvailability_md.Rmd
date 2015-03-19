@@ -1,0 +1,95 @@
+---
+title: "Food Availability Model"
+author: "Nick Strayer"
+date: "March 12, 2015"
+output: html_document
+---
+
+```{r}
+
+# Code for a simple food availability model based upon the assumptions of higher pelagic food quality
+# in the summer. 
+```
+
+## Parameters We Set: 
+
+```{r}
+#First we set up some user defined variables. 
+min     = 0.1 #minimum food availability value
+max     = 0.9 #max 
+highDay = 210*24 #Number of days into the year that the max food availability is (226 is aug 15)
+august  = 5856 #hours into the year
+```
+
+## The actual model
+
+```{r}
+#Now we generate the others
+scaler    = (max - min)/2 #range divided by two
+heightAdj = (max + min)/2 #average value
+hours      = 1:(365*24) #Set up a hour vector to loop over
+foodAvail = NULL  
+
+#Quick loop to generate the data. 
+for (hour in hours){
+  foodAvail = c(foodAvail, scaler * cos( (1/(365*24))*2*pi * (hour - highDay)) + heightAdj)
+}
+
+plot(hours,foodAvail, type = "l")
+```
+
+## The variability curve
+
+Here we set up another curve which represents the variablity of the food distribution at any time. 
+
+The value of the curve $f(hour) =$ variability of distribution. 
+
+
+```{r}
+min     = 0.01 #minimum food availability value
+max     = 0.12 #max 
+highDay = 100*24
+scaler    = (max - min)/2 #range divided by two
+heightAdj = (max + min)/2 #average value
+variability = NULL
+
+#Quick loop to generate the data. 
+for (hour in hours){
+  variability = c(variability, scaler * cos( (1/(365*24))*4*pi * (hour - highDay)) + heightAdj)
+}
+
+plot(hours,variability, type = "l")
+
+avail_var_df = as.data.frame(cbind(foodAvail, variability))
+```
+
+## Combined curves:
+
+We will now generate the bounding curves by adding and subtracting the variablity from the main curve. 
+
+```{r}
+highBound = NULL
+lowBound  = NULL
+
+for (hour in hours){
+  highBound = c(highBound, (foodAvail[hour] + variability[hour]))  
+  lowBound = c(lowBound, (foodAvail[hour] - variability[hour]))
+}
+
+distributionDf = as.data.frame(cbind(hours, highBound, lowBound))
+
+library(ggplot2)
+
+ggplot(distributionDf, aes(hours)) + 
+  geom_line(aes(y = highBound, colour = "#beaed4")) + 
+  geom_line(aes(y = lowBound, colour = "#7fc97f")) 
+
+```
+
+## Save to file 
+```{r}
+setwd("/Users/Nick/mysisModeling")
+#write.csv(distributionDf, "data/FoodAvail_Hour.csv", row.names=FALSE) #The bounded model  
+write.csv(avail_var_df, "data/FoodAvail_Hour.csv", row.names=FALSE) #The plain side curve. 
+
+```
