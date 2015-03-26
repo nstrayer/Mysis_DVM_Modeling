@@ -46,8 +46,8 @@ The value of the curve $f(hour) =$ variability of distribution.
 
 
 ```{r}
-min     = 0.01 #minimum food availability value
-max     = 0.12 #max 
+min     = 0.1 #minimum food availability value
+max     = 0.9 #max 
 highDay = 100*24
 scaler    = (max - min)/2 #range divided by two
 heightAdj = (max + min)/2 #average value

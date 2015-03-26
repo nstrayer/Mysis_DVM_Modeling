@@ -11,7 +11,6 @@ output:
 ```{r echo=FALSE}
 library(ggplot2)
 setwd("/Users/Nick/mysisModeling") #Doesnt actually do anything in chunks.
-
 ```
 ---
 
@@ -44,7 +43,9 @@ if(!file.exists("data/FoodAvail_Hour.csv")){ source("dataGen/foodAvailability.r"
 
 #Read in the data now. 
 depthData = read.csv("data/mysocline_hour.csv")$x
-foodAvail = read.csv("data/FoodAvail_hour.csv")$foodAvail
+foodCurve = read.csv("data/FoodAvail_hour.csv")
+foodAvail = foodCurve$foodAvail
+foodVar   = foodCurve$variability
 ```
 
 ## Class and method declarations: 
@@ -80,7 +81,6 @@ setMethod("show", "mysis",
               print("dead")
             }
           })
-
 ```
 
 __Real quick we need to make a model for decisions to migrate based upon condition:__
@@ -91,12 +91,12 @@ Where __$k$__ is an indicator of steepness, and __$m$__ is the midepoint of the 
 
 ```{r}
 migrationProb = function(condition){ #I am choosing to leave the random roll outside of script for continuity, could be changed
-  m = 150 #value of curve midpoint
+  m = 120 #value of curve midpoint
   k = 0.03 #steepness of curve
   x = condition 
   
   dist = 1/(1 + exp(-k* (x - m)))   
-  return(dist)
+  return(1 - dist)
 }
 ```
  
@@ -114,9 +114,13 @@ The function of the decision tree is such:
 
 
 ```{r, results='hide'}
+
+rewardUnits = .8
+
 setGeneric( "nextTime", function(object, ...){standardGeneric("nextTime")})
 setMethod("nextTime","mysis", 
-          function(object, foodRatio, time){       #Takes in the mysis object and the ratio of food quality at a given time. 
+          function(object, foodAvail, foodVar, time){       #Takes in the mysis object and the ratio of food quality at a given time. 
+            
             
             #Run the draws: 
             migrationDraw   = runif(1) #random number between 0 and 1, this will be used for the migration decision
@@ -124,14 +128,14 @@ setMethod("nextTime","mysis",
             predationDraw   = runif(1) #" " to see if killed by predation
             
             #Lets set some constants real quick: 
-            migrationCost = 30       #How many energy units the mysis use up migrating
+            migrationCost = 20       #How many energy units the mysis use up migrating
             migrationRisk = 0.0001   #Chance of being eaten if migrating
             stayRisk      = 0.00001  #Chance of being eaten if they stay on the bottom
             
             #Energy rewards:
-            rewardUnits     = 10
-            migrationReward = rnorm(1,rewardUnits, rewardUnits*.5)
-            stayReward      = rnorm(1,(rewardUnits * ( 1 - foodRatio)), rewardUnits*.5) 
+
+            migrationReward = rnorm(1,rewardUnits, foodVar)
+            stayReward      = rnorm(1,(rewardUnits * ( 1 - foodAvail)), foodVar) 
             #this makes the rewards responsive to conditions
             
             sunset  = 18 #hardcode sunset, fill this with real data later. 
@@ -139,10 +143,15 @@ setMethod("nextTime","mysis",
             #conditionCurve = 0.95 #hardcoded condition curve value, for debugging. 
             conditionCurve = migrationProb(object@energy)
             
+            
+            if (object@energy <= 0){ #did the mysis starve?
+              object@alive = FALSE
+            }     
+            
             #if the mysis is in good condition use standard migration chance, if bad use 1 - chance
-            if (time %% 24 == sunset + 1){
+            if ((time %% 24 == sunset + 1)&&(object@alive)){
               
-              if (migrationDraw > foodRatio) {
+              if (migrationDraw > foodAvail) {
                 object@migrating = migrationDraw_2 > conditionCurve 
                 object@energy = object@energy - migrationCost 
               } else {
@@ -153,9 +162,7 @@ setMethod("nextTime","mysis",
               object@migrating = FALSE
             }    
             
-            if (object@energy <= 0){ #did the mysis starve?
-              object@alive = FALSE
-            }     
+
 
             #Here is the decision tree:
             if (object@alive){ #If the mysis is alive let's run the decision tree
@@ -197,7 +204,7 @@ mysids = NULL
 numOfMysids = 5
 
 for (i in 1:numOfMysids){
-  initialenergy = sample(5:30,1) #draw initial energy from normal dist centered at 30 with stdev of 5. 
+  initialenergy = rnorm(1,150,25) #draw initial energy from normal dist centered at 30 with stdev of 5. 
   mysids = c(mysids, new("mysis", energy = initialenergy) )
 }
 ```
@@ -206,13 +213,13 @@ for (i in 1:numOfMysids){
 
 ```{r}
 migrations = NULL
-hours = 1:(24*100) #150 days
+hours = 1:(24*365) #150 days
 for (mysid in mysids){ #loop through the mysis
   migration = NULL 
   conditions = NULL
   for (i in hours){
 
-    mysid    = nextTime(mysid, foodAvail[i], i)
+    mysid    = nextTime(mysid, foodAvail[i], foodVar[i] , i)
     migration = c(migration, mysid@depth)
     conditions = c(conditions, mysid@energy)
   }
@@ -239,26 +246,34 @@ ggplot(migrationsDf, aes(y = -mysis1, x = hours)) + geom_line() +
 This obviously isn't right. 
 
 ```{r}
-plot(conditions, xlab = "hour")
+
+conditions_df = as.data.frame(cbind(conditions, hours))
+
+ggplot(conditions_df, aes(y = conditions, x = hours)) + geom_line() +geom_smooth() + 
+  labs(title = "Mysis condition over year", y = "energy units")
+
 ```
 
 ### Let's take a look at the energy reward distributions, monte carlo style: 
 We will set the food quality at 0.7
 
 ```{r}
-rewardUnits = 10
-foodRatio   = 0.7
-
+#rewardUnits = 1
+foodAvail   = 0.7
+foodVar     = 0.3
 migrateVals = NULL
 stayVals = NULL
 for (i in 1:5000){
-migrateVals = c(migrateVals, rnorm(1,rewardUnits, rewardUnits*.5))
-stayVals = c(stayVals, rnorm(1,(rewardUnits * ( 1 - foodRatio)), rewardUnits*.5) )
+  
+#   rnorm(1,rewardUnits, rewardUnits*stdMult)
+#             stayReward      = rnorm(1,(rewardUnits * ( 1 - foodAvail)), rewardUnits*stdMult) 
+migrateVals = c(migrateVals, rnorm(1,rewardUnits, foodVar))
+stayVals = c(stayVals, rnorm(1,(rewardUnits * ( 1 - foodAvail)), foodVar )  )
 }
 
-par(mfrow=c(1,2))
-hist(migrateVals, main = "Migrate")
-hist(stayVals, main = "Stay")
+par(mfrow=c(2,1))
+hist(migrateVals, main = "Migrate", xlim=c(-3,6))
+hist(stayVals, main = "Stay", xlim = c(-3,6))
 ```
 
 It would appear that we need to be a litle more 'mean' with our taking away of energy. 
