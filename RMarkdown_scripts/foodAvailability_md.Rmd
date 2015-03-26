@@ -15,8 +15,8 @@ output: html_document
 
 ```{r}
 #First we set up some user defined variables. 
-min     = 0.1 #minimum food availability value
-max     = 0.9 #max 
+min     = 0.15 #minimum food availability value
+max     = 0.97 #max 
 highDay = 210*24 #Number of days into the year that the max food availability is (226 is aug 15)
 august  = 5856 #hours into the year
 ```
