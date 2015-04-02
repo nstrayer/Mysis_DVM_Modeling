@@ -1,7 +1,7 @@
 ---
 title: "Main Model"
 author: "Nick Strayer"
-date: "March 8, 2015"
+date: "March 26, 2015"
 output:
   html_document:
     fig_height: 6
@@ -115,7 +115,7 @@ The function of the decision tree is such:
 
 ```{r, results='hide'}
 
-rewardUnits = .8
+rewardUnits = .78
 
 setGeneric( "nextTime", function(object, ...){standardGeneric("nextTime")})
 setMethod("nextTime","mysis", 
@@ -232,7 +232,7 @@ for (mysid in mysids){ #loop through the mysis
 
 Let's plot this small run to see what kind of behavior we are getting. 
 
-```{r echo=FALSE}
+```{r echo=FALSE, results='hide'}
 migrations = cbind(migrations, hours)
 
 migrationsDf = as.data.frame(migrations)
@@ -245,7 +245,7 @@ ggplot(migrationsDf, aes(y = -mysis1, x = hours)) + geom_line() +
 
 This obviously isn't right. 
 
-```{r}
+```{r echo=FALSE}
 
 conditions_df = as.data.frame(cbind(conditions, hours))
 
