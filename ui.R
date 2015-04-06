@@ -14,7 +14,8 @@ shinyUI(fluidPage(
                   "Mean Migration Reward:",
                   min = 0,
                   max = 1,
-                  value = .8),
+                  value = 0.8),
+      
       sliderInput("migrationCost",
                   "Energy Cost to Migrate:",
                   min = 0,
@@ -25,13 +26,24 @@ shinyUI(fluidPage(
                   "How many mysis to simulate?",
                   min = 1,
                   max = 100,
-                  value = 2)
+                  value = 1),
+
       
-#       numericInput("rewardUnits", 
-#                    label = h3("Units of Reward"), 
-#                    value = 0.8) 
-    ),
+      numericInput("migrationRisk", 
+                   label = h3("Migration Risk"), 
+                   value = 0),
+      
+      numericInput("stayRisk", 
+                   label = h3("Stay Risk"), 
+                   value = 0),
     
+    
+      radioButtons("plotType", 
+                    label = h3("Which Plot?"), 
+                    choices = list("Energy" = 1, 
+                                   "Migrations" = 2),
+                    selected = 1)
+    ),
     # Show a plot of the generated distribution
     mainPanel(
       plotOutput("foodCurve")

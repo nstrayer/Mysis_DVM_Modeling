@@ -10,6 +10,9 @@ output:
 
 ```{r echo=FALSE}
 library(ggplot2)
+library(reshape2)
+library(grid)
+library(gridExtra)
 setwd("/Users/Nick/mysisModeling") #Doesnt actually do anything in chunks.
 ```
 ---
@@ -115,75 +118,66 @@ The function of the decision tree is such:
 
 ```{r, results='hide'}
 
-rewardUnits = .78
+rewardUnits = .68
 
 setGeneric( "nextTime", function(object, ...){standardGeneric("nextTime")})
 setMethod("nextTime","mysis", 
           function(object, foodAvail, foodVar, time){       #Takes in the mysis object and the ratio of food quality at a given time. 
             
-            
             #Run the draws: 
             migrationDraw   = runif(1) #random number between 0 and 1, this will be used for the migration decision
             migrationDraw_2 = runif(1) #draw for second migration decision, this time compared to logistic curve
             predationDraw   = runif(1) #" " to see if killed by predation
-            
             #Lets set some constants real quick: 
-            migrationCost = 20       #How many energy units the mysis use up migrating
-            migrationRisk = 0.0001   #Chance of being eaten if migrating
-            stayRisk      = 0.00001  #Chance of being eaten if they stay on the bottom
-            
+            migrationCost = 21       #How many energy units the mysis use up migrating
+            migrationRisk = 0  #We don't really need to simulate predation.
+            stayRisk      = 0 
+#             migrationRisk = 0.0001   #Chance of being eaten if migrating
+#             stayRisk      = 0.00001  #Chance of being eaten if they stay on the bottom
+#             
             #Energy rewards:
-
-            migrationReward = rnorm(1,rewardUnits, foodVar)
-            stayReward      = rnorm(1,(rewardUnits * ( 1 - foodAvail)), foodVar) 
-            #this makes the rewards responsive to conditions
+            migrationReward = rnorm(1, (rewardUnits*(1 + foodAvail)), foodVar)
+            stayReward      = migrationReward * .2
+            threshold = 0.2  #Let's make sure that the benthic reward can never drop below a threshold.
+            if(stayReward < threshold){
+              stayReward = threshold
+            }
             
             sunset  = 18 #hardcode sunset, fill this with real data later. 
             sunrise = 7
-            #conditionCurve = 0.95 #hardcoded condition curve value, for debugging. 
             conditionCurve = migrationProb(object@energy)
-            
-            
+
             if (object@energy <= 0){ #did the mysis starve?
               object@alive = FALSE
+              object@energy = 0
             }     
-            
             #if the mysis is in good condition use standard migration chance, if bad use 1 - chance
             if ((time %% 24 == sunset + 1)&&(object@alive)){
-              
-              if (migrationDraw > foodAvail) {
+              if (migrationDraw < foodAvail) {
                 object@migrating = migrationDraw_2 > conditionCurve 
                 object@energy = object@energy - migrationCost 
               } else {
                  object@migrating = FALSE
-              }
-              
+              } 
             } else if (time %% 24 == sunrise){ #bring them back down at sunrise. 
               object@migrating = FALSE
             }    
-            
-
-
+          
             #Here is the decision tree:
             if (object@alive){ #If the mysis is alive let's run the decision tree
-  
               if (object@migrating){ 
-                object@depth = depthData[time] #Grab the mysocline limit at this hour 
+                object@depth = depthData[time] #Grab the mysocline limit at this hour   
                 
                 if (predationDraw > migrationRisk){ #The mysis evades predation
                   object@energy = object@energy + migrationReward 
-                
                 } else { #Mysis is eaten
                   object@alive = FALSE
-                }
-                
+                } 
               } else { #The mysis didn't migrate
-                
-                object@depth = 100
+                object@depth = 100   
                 
                 if (predationDraw > stayRisk){ #The mysis evades predation
-                  object@energy = object@energy +  stayReward
-                  
+                  object@energy = object@energy +  stayReward                 
                 } else { #Mysis is eaten
                   object@alive = FALSE
                 }
@@ -191,7 +185,6 @@ setMethod("nextTime","mysis",
             }
             object} #Return the mysis
           )
-
 ```
 
 
@@ -201,7 +194,8 @@ Now that the model is all set up can run it over a small subset of the eventual 
 
 ```{r}
 mysids = NULL
-numOfMysids = 5
+numOfMysids = 200
+mysisNames = paste("mysis",(seq(1,numOfMysids)), sep = "")
 
 for (i in 1:numOfMysids){
   initialenergy = rnorm(1,150,25) #draw initial energy from normal dist centered at 30 with stdev of 5. 
@@ -212,18 +206,21 @@ for (i in 1:numOfMysids){
 ... and now we can run the model on those mysids: 
 
 ```{r}
-migrations = NULL
+migrations = NULL #Initialize some dataframes to keep track of the migrations and conditions values for the mysids. 
+conditions = NULL
+alive      = NULL
 hours = 1:(24*365) #150 days
 for (mysid in mysids){ #loop through the mysis
-  migration = NULL 
-  conditions = NULL
+  migration = NULL  
+  condition = NULL
   for (i in hours){
-
     mysid    = nextTime(mysid, foodAvail[i], foodVar[i] , i)
     migration = c(migration, mysid@depth)
-    conditions = c(conditions, mysid@energy)
+    condition = c(condition, mysid@energy)
+    if (i == length(hours)) { alive = c(alive, mysid@alive)}
   }
   migrations = cbind(migrations, migration) # add to the object of migrations. 
+  conditions = cbind(conditions, condition)
 } 
 
 ```
@@ -233,47 +230,62 @@ for (mysid in mysids){ #loop through the mysis
 Let's plot this small run to see what kind of behavior we are getting. 
 
 ```{r echo=FALSE, results='hide'}
-migrations = cbind(migrations, hours)
+migrations = cbind(hours,migrations)
 
-migrationsDf = as.data.frame(migrations)
-colnames(migrationsDf) = c("mysis1", "mysis2", "mysis3", "mysis4", "mysis5","hours")
-ggplot(migrationsDf, aes(y = -mysis1, x = hours)) + geom_line() + 
-  labs(title = "Mysis migration patterns for first 100 days of year", y = "Depth below surface")
+#Make the dataframe for the migrations
+migrations_df = as.data.frame(migrations)
+names(migrations_df) = c("hours", mysisNames)
+migrations_plot = melt(migrations_df, id = 'hours')
+
+#Render the plot for the migrations
+# a = ggplot(migrations_plot, aes(x = hours, y = -value, group = variable)) + geom_line(aes(color = variable)) + 
+#   labs(title = "Mysis migration patterns for first 100 days of year", y = "Depth below surface", x = "") + theme(legend.position="none")
+
+#Assemble the dataframe for condition
+conditions_df = as.data.frame(cbind(hours, conditions))
+names(conditions_df) = c("hours", mysisNames)
+conditions_plot = melt(conditions_df, id = 'hours')
+
+#Find portion who died
+mysidsWhoDied = tail(conditions_df, 1)[1:numOfMysids+1] <= 0
+mortalityRate = sum(mysidsWhoDied)/numOfMysids
+
+#Draw condition plot
+b = ggplot(conditions_plot, aes(x = hours, y = value, group= variable)) + stat_smooth(aes(color = variable),method = "gam", formula = y ~ s(x, bs = "cs")) + 
+  labs(title = paste("Mysis condition over year,", "Mortality Rate:", mortalityRate), y = "energy units") + theme(legend.position="none")
+
+b
+
+# #Plot both migrations and condition on top of eachother. 
+# Plot = arrangeGrob(a,b,ncol=1, main = paste("Migration and Condition,", "Mortality Rate:", mortalityRate) )
+# Plot 
+
+
 ```
 
-## Points to address: 
+## What are the patterns of the mysis that survived?
 
-This obviously isn't right. 
+By plotting a histogram of the days migrated by surviving mysids we can get a glimps into the more succesful strategies employed. 
 
-```{r echo=FALSE}
-
-conditions_df = as.data.frame(cbind(conditions, hours))
-
-ggplot(conditions_df, aes(y = conditions, x = hours)) + geom_line() +geom_smooth() + 
-  labs(title = "Mysis condition over year", y = "energy units")
-
-```
-
-### Let's take a look at the energy reward distributions, monte carlo style: 
-We will set the food quality at 0.7
-
+First we make a function that takes in migration height data and returns how many days the mysid migrated:
 ```{r}
-#rewardUnits = 1
-foodAvail   = 0.7
-foodVar     = 0.3
-migrateVals = NULL
-stayVals = NULL
-for (i in 1:5000){
-  
-#   rnorm(1,rewardUnits, rewardUnits*stdMult)
-#             stayReward      = rnorm(1,(rewardUnits * ( 1 - foodAvail)), rewardUnits*stdMult) 
-migrateVals = c(migrateVals, rnorm(1,rewardUnits, foodVar))
-stayVals = c(stayVals, rnorm(1,(rewardUnits * ( 1 - foodAvail)), foodVar )  )
-}
-
-par(mfrow=c(2,1))
-hist(migrateVals, main = "Migrate", xlim=c(-3,6))
-hist(stayVals, main = "Stay", xlim = c(-3,6))
+howManyMigrations = function(mysid){return(365 - sum(mysid[seq(19,(365*24), 24)] == 100))}
 ```
 
-It would appear that we need to be a litle more 'mean' with our taking away of energy. 
+Next, we run this through the mysids that survived. 
+```{r}
+mysidsWhoLived = mysidsWhoDied == FALSE
+
+daysMigrated = NULL
+
+for(indv in mysisNames[mysidsWhoLived]){ 
+  daysSurvived = howManyMigrations(migrations_df[[indv]])
+  daysMigrated = c(daysMigrated, daysSurvived)
+  }
+
+survivingMysis = data.frame(daysMigrated)
+
+ggplot(survivingMysis, aes(x = daysMigrated)) + 
+  geom_histogram(aes(y=..count../sum(..count..)), color = "black", fill = "#7fc97f", binwidth = 10) + 
+  labs(title = "Days Migrated for Surviving Mysids", x = "Days Migrated", y = "Freq")
+```
