@@ -1,7 +1,7 @@
 library(ggplot2)
 library(reshape2)
-library(grid)
-library(gridExtra)
+# library(grid)
+# library(gridExtra)
 setwd("/Users/Nick/mysisModeling") #Doesnt actually do anything in chunks.
 
 ############################################################################################################
