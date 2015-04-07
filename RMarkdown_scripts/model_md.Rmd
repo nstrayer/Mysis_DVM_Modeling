@@ -118,7 +118,8 @@ The function of the decision tree is such:
 
 ```{r, results='hide'}
 
-rewardUnits = .68
+rewardUnits = .67
+migrationCost = 20       #How many energy units the mysis use up migrating
 
 setGeneric( "nextTime", function(object, ...){standardGeneric("nextTime")})
 setMethod("nextTime","mysis", 
@@ -129,7 +130,6 @@ setMethod("nextTime","mysis",
             migrationDraw_2 = runif(1) #draw for second migration decision, this time compared to logistic curve
             predationDraw   = runif(1) #" " to see if killed by predation
             #Lets set some constants real quick: 
-            migrationCost = 21       #How many energy units the mysis use up migrating
             migrationRisk = 0  #We don't really need to simulate predation.
             stayRisk      = 0 
 #             migrationRisk = 0.0001   #Chance of being eaten if migrating
@@ -194,7 +194,7 @@ Now that the model is all set up can run it over a small subset of the eventual 
 
 ```{r}
 mysids = NULL
-numOfMysids = 200
+numOfMysids = 250
 mysisNames = paste("mysis",(seq(1,numOfMysids)), sep = "")
 
 for (i in 1:numOfMysids){
@@ -250,12 +250,14 @@ conditions_plot = melt(conditions_df, id = 'hours')
 mysidsWhoDied = tail(conditions_df, 1)[1:numOfMysids+1] <= 0
 mortalityRate = sum(mysidsWhoDied)/numOfMysids
 
+subtitleText = paste(numOfMysids, "mysids, Reward:", rewardUnits, "Migration Cost:", migrationCost, ", Mortality Rate:",mortalityRate)
+
 #Draw condition plot
 b = ggplot(conditions_plot, aes(x = hours, y = value, group= variable)) + stat_smooth(aes(color = variable),method = "gam", formula = y ~ s(x, bs = "cs")) + 
-  labs(title = paste("Mysis condition over year,", "Mortality Rate:", mortalityRate), y = "energy units") + theme(legend.position="none")
+  labs(title = "blah!", y = "energy units") + theme(legend.position="none") +  ggtitle(bquote(atop(.("Mysis Condition Over Year"), atop(italic(.(subtitleText)), "")))) 
 
 b
-
+ggsave(file = paste("figures/condition", rewardUnits, "_", migrationCost,".pdf", sep = ""))
 # #Plot both migrations and condition on top of eachother. 
 # Plot = arrangeGrob(a,b,ncol=1, main = paste("Migration and Condition,", "Mortality Rate:", mortalityRate) )
 # Plot 
@@ -286,6 +288,8 @@ for(indv in mysisNames[mysidsWhoLived]){
 survivingMysis = data.frame(daysMigrated)
 
 ggplot(survivingMysis, aes(x = daysMigrated)) + 
-  geom_histogram(aes(y=..count../sum(..count..)), color = "black", fill = "#7fc97f", binwidth = 10) + 
-  labs(title = "Days Migrated for Surviving Mysids", x = "Days Migrated", y = "Freq")
+  geom_histogram(aes(y=..count../sum(..count..)), color = "black", fill = "#7fc97f", binwidth = 5) + 
+  labs(title = "Days Migrated for Surviving Mysids", x = "Days Migrated", y = "Freq") 
+
+ggsave(paste("figures/days_migrated", rewardUnits, "_", migrationCost,".pdf", sep = ""))
 ```
