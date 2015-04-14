@@ -92,7 +92,17 @@ $$f(S_l) = 1/k \cdot \log{\Big(\frac{S_l}{I_x}\Big)}$$
 
 ---
 
+__Moon Cycle__
 
+Raw data was read in from the National Renewable Energy Laboratories data explorer (Citation), however the sensitivity was not high enough to pick up the lunar cycles. Due to this nighttime light intensity levels were substituted with the equation: 
+
+$c = $ Moon cycle length, 
+
+$h = h_c (\text{mod }c)$
+
+$$f(h_c) = 0.5\Big[\cos{\Big( \frac{1}{c}\cdot 2\pi \cdot h_c\Big)}\Big] + 0.5$$
+
+---
 
 __... This is the point I have made it to thus far.__ 
 
