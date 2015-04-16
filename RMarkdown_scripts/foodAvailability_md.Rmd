@@ -6,7 +6,7 @@ output: html_document
 ---
 
 ```{r}
-
+library(ggplot2)
 # Code for a simple food availability model based upon the assumptions of higher pelagic food quality
 # in the summer. 
 ```
@@ -35,7 +35,7 @@ for (hour in hours){
   foodAvail = c(foodAvail, scaler * cos( (1/(365*24))*2*pi * (hour - highDay)) + heightAdj)
 }
 
-plot(hours,foodAvail, type = "l")
+qplot(hours,foodAvail, geom = "line", main = "Food Availability Over Year")
 ```
 
 ## The variability curve
@@ -58,7 +58,7 @@ for (hour in hours){
   variability = c(variability, scaler * cos( (1/(365*24))*4*pi * (hour - highDay)) + heightAdj)
 }
 
-plot(hours,variability, type = "l")
+qplot(hours,variability, geom = "line", main = "Food Variability")
 
 avail_var_df = as.data.frame(cbind(foodAvail, variability))
 ```
@@ -91,5 +91,23 @@ ggplot(distributionDf, aes(hours)) +
 setwd("/Users/Nick/mysisModeling")
 #write.csv(distributionDf, "data/FoodAvail_Hour.csv", row.names=FALSE) #The bounded model  
 write.csv(avail_var_df, "data/FoodAvail_Hour.csv", row.names=FALSE) #The plain side curve. 
+
+```
+
+```{r echo=FALSE}
+library(ggplot2)
+migrationProb = function(condition){ #I am choosing to leave the random roll outside of script for continuity, could be changed
+  m = 120 #value of curve midpoint
+  k = 0.03 #steepness of curve
+  x = condition 
+  
+  dist = 1/(1 + exp(-k* (x - m)))   
+  return(1 - dist)
+}
+
+
+condition = seq(1,240, 0.1)
+results = sapply(condition, migrationProb)
+#qplot(condition, results, geom = "line", main = "Migration Probability By Mysis Condition", ylab = "Prob. of Migration")
 
 ```

@@ -2,10 +2,9 @@ library(ggplot2)
 library(reshape2)
 library(grid)
 library(gridExtra)
-setwd("/Users/Nick/mysisModeling") #Doesnt actually do anything in chunks.
+setwd("/Users/Nick/mysisModeling") 
 
 ############################################################################################################
-
 #Check for solar data
 if(!file.exists("data/light_day_moon_hour.csv")){ source("dataGen/solarData.r") } 
 
@@ -25,7 +24,6 @@ foodAvail = foodCurve$foodAvail
 foodVar   = foodCurve$variability
 
 ############################################################################################################
-
 setClass("mysis",
          representation(
            energy    = "numeric",    # The energy reserves are a numeric value
@@ -61,12 +59,9 @@ migrationProb = function(condition){ #I am choosing to leave the random roll out
   dist = 1/(1 + exp(-k* (x - m)))   
   return(1 - dist)
 }
+
+
 ############################################################################################################
-
-
-# rewardUnits_list    = c(0.67)  #for debugging
-# migrationCost_list  = c(20)
-
 numOfMysids         = 250
 rewardUnits_list    = seq(0.64,0.69,0.005)
 migrationCost_list  = seq(18,21.5,0.25)
