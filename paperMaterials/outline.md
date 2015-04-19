@@ -22,43 +22,56 @@ By modeling we are able to investigate effects at a much lower cost and also esc
 
 It should be noted that the results and their specific units and/or amounts may not be exact, but what is important are the trends. We hope that the results from this modeling based exploration into DVM will help point future real-world sampling efforts in a more efficient and impactful direction. 
 
+---
 
 ## Methods:
 
-### Programing Language: 
+#### Programing Language: 
 
-The programming language used for the model is R (CITATION). R was chosen as it is the most accessable to members of the community that will benefit from the model. This will enhance the models future use by researchers. 
+The programming language used for the model is R (CITATION). R was chosen due to its high adoption in the ecology community. This will allow for easier expansion of the model in the future. 
 
-### Agent Based: 
+#### Agent Based: 
 
-An agent based approach was used in the construction of the model as it allows one to see the effects at a small scale of environmental changes and allows for the potential detection of multiple stable-states in migration patterns through the use of monte-carlo style running of many agents over the same environmental conditions. 
+An agent based approach was used for the model as it allows the interogation of  effects at a small scale of environmental changes and allows for the potential detection of multiple stable-states in migration patterns through the use of monte-carlo style running of many agents over the same environmental conditions. 
 
-### Expandability: 
+#### Expandability: 
 
 The environmental variables fed into the agent-based main model are generated using their own sub-models. This form was chosen because it allows the quick perturbation of environmental factors but also for it's ability for model data to be substituted with real data. As more sampling data is obtained it can be gradually integrated into the model to allow for more precise predictions and measurements of effects. 
 
+### Variables: 
+
+
+|  Variable | Value  | Description | Units | 
+|---        |---     |---          |---    |
+|$s$        | 1 for winter/spring, -1 for summer/fall     |Seasonality         
+|$M$        | 40     |  Max Depth         |  Meters     |
+|$C$        | .003   |  Curve Steepness     |       
+|$m$        | 1667   |  Midpoint of curve     |  Hours     |
+|$h$        | 1,2,...,8750      |    Hour of year      |   Hours    |
+|$min$      | 0.15 | Minimum value of food availability ratio|       
+|$max$      | 0.15 | Maximum value of food availability ratio| 
+|$s$ | $\frac{min - max}{2}$ | 
+|$a$ | $\frac{min + max}{2}$|
+|$t$ | $\frac{1}{365 \cdot 24}$ | Sinusoidal scaler |
+|$H$ | 5040 | Hour of peak availability| Hours|
+|$c$ | $27.8 \cdot 24$ | Moon cycle length | Hours|
+|$h_c$| $h$ modulous $c$ | The point in the moon cycle | Hours|
+|$k$ | 0.3 | Extinction coefficient of lake (CITATION) | UNITS|
+|$I_x$ | $1 \times 10 ^{-3}$ |Mysis Light threshold (CITATION) | Lux |
+|$S_l$ | (input) | Light level at lake surface | Lux |
+
+
 ### Data Generating Models: 
 
-Four sub-models were developed to feed in environmental variables to the agent-based mysis model. R Markdown scripts of all data generate are availabile in the apendix at rpubs.com/nstrayer.
+Four sub-models were developed to generate environmental variables for the main model. R Markdown scripts of all data generate are availabile in the apendix at rpubs.com/nstrayer.
 
-
----
 
 __Thermocline Model:__
 
 The first is a model of the depth in the water column at which 10 degrees celicius is attained. This temperature was chosen as a Mysis threshold based upon the work of (CITATION). To model this two sigmoidal curves were joined together to form the pattern observed in all large bodies of water over a year. 
 
-$$f(h) = \frac{s \cdot M}{1 + e^{-k(h - m)}}$$
+$$f(h) = \frac{s \cdot M}{1 + e^{-C(h - m)}}$$
 
-$s =$ Seasonality (1 for winter/spring, -1 for summer/fall), 
-
-$M =$ Max Depth,
-
-$k =$ Steepness of curve,
-
-$m =$ Midpoint of curve,
-
-$h =$ Hour of year
 
 <div style="text-align:center"><img src="figures/thermoclineModel.png" alt="termocline model" height="350"></div>
 
@@ -68,20 +81,7 @@ __Food Availability:__
 
 The food availability ratio is bounded between 0 and 1 and is a normalized measure of food quality in the pelagic waters to the whole water column. E.g. food availability = 0.8 implies 80% of the food is available in the pelagic waters. 
 
-$$f(h) = s \cdot \cos{[t  \cdot 2\pi \cdot (h - H) + a]}$$
-
-$min =$ Minimum value of food availability ratio,
-
-$max =$ Maximum value of food availability ratio, 
-
-$s = \frac{min - max}{2}$, 
-
-$t = \frac{1}{365 \cdot 24}$, 
-
-$H =$ Hour of peak availability, 
-
-$a = \frac{min + max}{2}$ 
-
+$$f(h) = s \cdot \cos{[ (1/8750) \cdot 2\pi \cdot (h - H) + a]}$$
 
 
 <div style="text-align:center"><img src="figures/foodAvailabilityModel.png" alt="termocline model" height="350"></div>
@@ -106,11 +106,6 @@ __Moon Cycle:__
 Raw data was read in from the National Renewable Energy Laboratories data explorer (Citation), however the sensitivity was not high enough to pick up the lunar cycles. Due to this nighttime light intensity levels were substituted with the model. The greatest light intensity between the moon cycle model and real data was chosen for the final dataset. 
 
 $$f(h_c) = 0.5\Big[\cos{\Big( \frac{1}{c}\cdot 2\pi \cdot h_c\Big)}\Big] + 0.5$$
-
-
-$c = $ Moon cycle length, 
-
-$h = h_c (\text{mod }c)$
 
 ---
 __Beer's Law:__
@@ -166,6 +161,12 @@ __Twice Daily Decision:__
 ---
 
 __... This is the point I have made it to thus far.__ 
+
+$k = $ Extinction coefficient, 
+
+$I_x = $ Mysis Light threshold (Mysis light modeling citation),
+
+$S_l = $ Surface light
 
 
 

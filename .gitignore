@@ -6,3 +6,4 @@ figures/
 *.jpg
 .Rhistory
 .RData
+/latex
