@@ -62,7 +62,9 @@ migrationProb = function(condition){ #I am choosing to leave the random roll out
 
 
 ############################################################################################################
-numOfMysids         = 250
+numOfMysids         = 500
+rewardUnits    = 0.66
+migrationCost  = 20
 rewardUnits_list    = seq(0.64,0.69,0.005)
 migrationCost_list  = seq(18,21.5,0.25)
 
@@ -186,17 +188,19 @@ for (rewardUnits in rewardUnits_list){
     
     #Find portion who died
     mysidsWhoDied = tail(conditions_df, 1)[1:numOfMysids+1] <= 0
-    mortalityRate = sum(mysidsWhoDied)/numOfMysids
+    mortalityRate = round(sum(mysidsWhoDied)/numOfMysids,3)
 
     
     #Draw condition plot
+    mainTitle = "Condition Over Year"
     subtitleText = paste(numOfMysids, "mysids, Reward:", rewardUnits, ", Migration Cost:", migrationCost, ", Mortality Rate:", mortalityRate)
     conditions_plot = melt(conditions_df, id = 'hours')
     b = ggplot(conditions_plot, aes(x = hours, y = value, group= variable)) + stat_smooth(aes(color = variable),method = "gam", formula = y ~ s(x, bs = "cs")) + 
       labs(title = "blah!", y = "energy units") + theme(legend.position="none") +  
-      ggtitle(bquote(atop(.("Mysis Condition Over Year"), atop(italic(.(subtitleText)), "")))) 
+      ggtitle(bquote(atop(.(mainTitle), atop(italic(.(subtitleText)), "")))) 
     b
-    ggsave(file = paste("figures/condition/cond_", rewardUnits, "_", migrationCost,".pdf", sep = ""))
+    ggsave(b, file = paste("figures/condition/cond_", rewardUnits, "_", migrationCost,".pdf", sep = ""))
+    ggsave(b, file = "paperMaterials/figures/conditionPlot.pdf", width = 6, height = 4.5)
     
 #     #Plot both migrations and condition on top of eachother. 
 #     Plot = arrangeGrob(a,b,ncol=1, main = paste("Migration and Condition,", "Mortality Rate:", mortalityRate) )

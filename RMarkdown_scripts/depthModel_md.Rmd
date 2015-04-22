@@ -79,8 +79,9 @@ for (i in 1:(24*365)){
 
 mysoclineDf = as.data.frame(cbind(hours, mysocline))
 m = ggplot(mysoclineDf, aes(x = hours, y = -mysocline)) + geom_line()
-m + labs(title = "Depth of Mysocline", x = "hour", y = "depth from surface") + 
+m = m + labs(title = "Depth of Mysocline", x = "hour", y = "depth from surface (m)") + 
   theme_bw()
+ggsave(m, filename = "paperMaterials/figures/mysocline.pdf", width = 7, height = 2.5)
 #write.csv(mysocline, "data/mysocline_hour.csv", row.names=FALSE)
 ```
 

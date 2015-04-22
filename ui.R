@@ -5,7 +5,7 @@ library(ggplot2)
 shinyUI(fluidPage(
   
   # Application title
-  titlePanel("Mysis Condition"),
+  titlePanel(em("Mysis Condition")),
   
   # Sidebar with a slider input for the number of bins
   sidebarLayout(
@@ -23,7 +23,7 @@ shinyUI(fluidPage(
                   value = 20),
       
       sliderInput("numOfMysids",
-                  "How many mysis to simulate?",
+                  "How many individuals to simulate?",
                   min = 1,
                   max = 100,
                   value = 3)

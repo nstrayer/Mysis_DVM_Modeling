@@ -194,7 +194,7 @@ shinyServer(function(input, output) {
     
     #Draw condition plot
     ggplot(conditions_plot, aes(x = hours, y = value, group= variable)) + stat_smooth(aes(color = variable),method = "gam", formula = y ~ s(x, bs = "cs")) + 
-      labs(y = "energy units") + theme(legend.position="none") +  ggtitle(bquote(atop(.("Mysis Condition Over Year"), atop(italic(.(subtitleText)), "")))) 
+      labs(y = "energy units") + theme(legend.position="none") +  ggtitle(bquote(atop(.("Condition Over Year"), atop(italic(.(subtitleText)), "")))) 
 
     
 #     ############################################################################################################
