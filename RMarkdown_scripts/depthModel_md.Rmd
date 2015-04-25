@@ -61,7 +61,10 @@ for (hour in lightData){
 
 isoclineDf = as.data.frame(cbind(hours, isocline))
 m = ggplot(isoclineDf, aes(x = hours, y = -isocline)) + geom_line()
-m + labs(title = "Depth of Mylux Limit", x = "hour", y = "depth from surface")
+m + labs(title = "Depth of Mysis Light Threshold", x = "hour", y = "depth from surface")
+setwd("/Users/Nick/mysisModeling/paperMaterials/figures")
+ggsave(filename = "lightThreshold.pdf", width = 6, height = 4.5)
+
 ```
 
 ## Mysocline
@@ -79,9 +82,11 @@ for (i in 1:(24*365)){
 
 mysoclineDf = as.data.frame(cbind(hours, mysocline))
 m = ggplot(mysoclineDf, aes(x = hours, y = -mysocline)) + geom_line()
-m = m + labs(title = "Depth of Mysocline", x = "hour", y = "depth from surface (m)") + 
-  theme_bw()
-ggsave(m, filename = "paperMaterials/figures/mysocline.pdf", width = 7, height = 2.5)
+m = m + labs(title = "Depth of Mysocline", x = "hour", y = "depth from surface (m)") 
+m
+setwd("/Users/Nick/mysisModeling/paperMaterials/figures")
+ggsave(filename = "mysocline.pdf", width = 6, height = 4.5)
+
 #write.csv(mysocline, "data/mysocline_hour.csv", row.names=FALSE)
 ```
 

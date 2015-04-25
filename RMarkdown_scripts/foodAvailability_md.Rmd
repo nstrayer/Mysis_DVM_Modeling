@@ -36,6 +36,8 @@ for (hour in hours){
 }
 
 qplot(hours,foodAvail, geom = "line", main = "Food Availability Over Year")
+setwd("/Users/Nick/mysisModeling/paperMaterials/figures")
+ggsave(filename = "foodAvailability.pdf", width = 6, height = 4.5)
 ```
 
 ## The variability curve
@@ -59,6 +61,8 @@ for (hour in hours){
 }
 
 qplot(hours,variability, geom = "line", main = "Food Variability")
+setwd("/Users/Nick/mysisModeling/paperMaterials/figures")
+ggsave(filename = "foodVariability.pdf", width = 6, height = 4.5)
 
 avail_var_df = as.data.frame(cbind(foodAvail, variability))
 ```
@@ -89,8 +93,8 @@ ggplot(distributionDf, aes(hours)) +
 ## Save to file 
 ```{r}
 setwd("/Users/Nick/mysisModeling")
-#write.csv(distributionDf, "data/FoodAvail_Hour.csv", row.names=FALSE) #The bounded model  
-write.csv(avail_var_df, "data/FoodAvail_Hour.csv", row.names=FALSE) #The plain side curve. 
+#write.csv(distributionDf, "data/FoodAvail_Hour.csv", row.names=FALSE) #The bounded model  #
+#write.csv(avail_var_df, "data/FoodAvail_Hour.csv", row.names=FALSE) #The plain side curve. 
 
 ```
 
@@ -108,6 +112,8 @@ migrationProb = function(condition){ #I am choosing to leave the random roll out
 
 condition = seq(1,240, 0.1)
 results = sapply(condition, migrationProb)
-#qplot(condition, results, geom = "line", main = "Migration Probability By Mysis Condition", ylab = "Prob. of Migration")
+qplot(condition, results, geom = "line", main = "Migration Probability By Condition", ylab = "Prob. of Migration")
+setwd("/Users/Nick/mysisModeling/paperMaterials/figures")
+ggsave(filename = "migrationProb.pdf", width = 6, height = 4.5)
 
 ```

@@ -84,7 +84,7 @@ shinyServer(function(input, output) {
     setMethod("nextTime","mysis", 
               function(object, foodAvail, foodVar, time){       #Takes in the mysis object and the ratio of food quality at a given time. 
                 
-                #Run the draws: 
+                #Run the draws: q
                 migrationDraw   = runif(1) #random number between 0 and 1, this will be used for the migration decision
                 migrationDraw_2 = runif(1) #draw for second migration decision, this time compared to logistic curve
                 predationDraw   = runif(1) #" " to see if killed by predation
