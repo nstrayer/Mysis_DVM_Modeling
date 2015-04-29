@@ -1,0 +1,72 @@
+\begin{thebibliography}{9}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\providecommand{\bibinfo}[2]{#2}
+\ifx\xfnm\relax \def\xfnm[#1]{\unskip,\space#1}\fi
+%Type = Article
+\bibitem[{Watkins et~al.(2015)Watkins, Rudstam, Connerton, Schaner, and
+  Rudstam}]{previousDVM}
+\bibinfo{author}{J.~M. Watkins}, \bibinfo{author}{L.~G. Rudstam},
+  \bibinfo{author}{M.~J. Connerton}, \bibinfo{author}{T.~Schaner},
+  \bibinfo{author}{K.~L. Rudstam, Per G.~Bowen},
+\newblock \bibinfo{title}{Abundance and spatial distribution of mysis diluviana
+  in lake ontario in 2008 estimated with 120 khz hydroacoustic surveys and net
+  tows},
+\newblock \bibinfo{journal}{AQUATIC ECOSYSTEM HEALTH \& MANAGEMENT}
+  \bibinfo{volume}{18} (\bibinfo{year}{2015}) \bibinfo{pages}{63--75}.
+%Type = Manual
+\bibitem[{{R Core Team}(2014)}]{RCite}
+\bibinfo{author}{{R Core Team}}, \bibinfo{title}{R: A Language and Environment
+  for Statistical Computing}, \bibinfo{organization}{R Foundation for
+  Statistical Computing}, \bibinfo{address}{Vienna, Austria},
+  \bibinfo{year}{2014}.
+%Type = Article
+\bibitem[{Jensen et~al.(1961)Jensen, Hurwicz, and Uzawa}]{lightTemp}
+\bibinfo{author}{O.~P. Jensen}, \bibinfo{author}{L.~Hurwicz},
+  \bibinfo{author}{H.~Uzawa},
+\newblock \bibinfo{title}{Diel vertical migration in the lake superior pelagic
+  community. ii. modeling trade-offs at an intermediate trophic level},
+\newblock \bibinfo{journal}{Naval Research Logistics Quarterly}
+  \bibinfo{volume}{8} (\bibinfo{year}{1961}) \bibinfo{pages}{175--191}.
+%Type = Article
+\bibitem[{Boscarino et~al.(2010)Boscarino, Rudstam, Minson, and
+  Freund}]{lightPaper}
+\bibinfo{author}{B.~T. Boscarino}, \bibinfo{author}{L.~G. Rudstam},
+  \bibinfo{author}{M.~A. Minson}, \bibinfo{author}{E.~E. Freund},
+\newblock \bibinfo{title}{{Laboratory-derived light and temperature preferences
+  of juvenile mysid shrimp, Mysis diluviana}},
+\newblock \bibinfo{journal}{{JOURNAL OF GREAT LAKES RESEARCH}}
+  \bibinfo{volume}{{36}} (\bibinfo{year}{{2010}}) \bibinfo{pages}{{699--706}}.
+%Type = Misc
+\bibitem[{NREL(2015)}]{nrelData}
+\bibinfo{author}{NREL}, \bibinfo{year}{2015}.
+%Type = Article
+\bibitem[{Palmer and Johnsen(2015)}]{lunarCycle}
+\bibinfo{author}{G.~Palmer}, \bibinfo{author}{S.~Johnsen},
+\newblock \bibinfo{title}{{Downwelling spectral irradiance during evening
+  twilight as a function of the lunar phase}},
+\newblock \bibinfo{journal}{{APPLIED OPTICS}} \bibinfo{volume}{{54}}
+  (\bibinfo{year}{{2015}}) \bibinfo{pages}{{B85--B92}}.
+%Type = Book
+\bibitem[{Hutchinson(1957)}]{beersLaw}
+\bibinfo{author}{G.~Hutchinson}, \bibinfo{title}{A treatise on limnology},
+  volume \bibinfo{volume}{1, Geology}, \bibinfo{publisher}{Wiley},
+  \bibinfo{year}{1957}.
+%Type = Manual
+\bibitem[{Chang et~al.(2015)Chang, Cheng, Allaire, Xie, and
+  McPherson}]{shinyCite}
+\bibinfo{author}{W.~Chang}, \bibinfo{author}{J.~Cheng},
+  \bibinfo{author}{J.~Allaire}, \bibinfo{author}{Y.~Xie},
+  \bibinfo{author}{J.~McPherson}, \bibinfo{title}{shiny: Web Application
+  Framework for R}, \bibinfo{year}{2015}. \bibinfo{note}{R package version
+  0.11.1}.
+%Type = Article
+\bibitem[{Isenstein et~al.(2014)Isenstein, Trescott, and Park}]{algaeBlooms}
+\bibinfo{author}{E.~M. Isenstein}, \bibinfo{author}{A.~Trescott},
+  \bibinfo{author}{M.-H. Park},
+\newblock \bibinfo{title}{{Multispectral Remote Sensing of Harmful Algal Blooms
+  in Lake Champlain, USA}},
+\newblock \bibinfo{journal}{{WATER ENVIRONMENT RESEARCH}}
+  \bibinfo{volume}{{86}} (\bibinfo{year}{{2014}})
+  \bibinfo{pages}{{2271--2278}}.
+
+\end{thebibliography}

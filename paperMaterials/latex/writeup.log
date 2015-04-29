@@ -1,0 +1,409 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  28 APR 2015 23:38
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**writeup.tex
+(./writeup.tex
+LaTeX2e <2014/05/01>
+Babel <3.9k> and hyphenation patterns for 78 languages loaded.
+(./elsarticle.cls
+Document Class: elsarticle 2009/09/17, 1.20b: Elsevier Ltd
+\@bls=\dimen102
+(/usr/local/texlive/2014/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2014/texmf-dist/tex/latex/base/size12.clo
+File: size12.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen103
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2014/04/25 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/05/08 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/latexconfig/graphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count87
+))
+\Gin@req@height=\dimen104
+\Gin@req@width=\dimen105
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/psnfss/pifont.sty
+Package: pifont 2005/04/12 PSNFSS-v9.2a Pi font support (SPQR) 
+LaTeX Font Info:    Try loading font information for U+pzd on input line 63.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/psnfss/upzd.fd
+File: upzd.fd 2001/06/04 font definitions for U/pzd.
+)
+LaTeX Font Info:    Try loading font information for U+psy on input line 64.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/psnfss/upsy.fd
+File: upsy.fd 2001/06/04 font definitions for U/psy.
+))
+\c@tnote=\count88
+\c@fnote=\count89
+\c@cnote=\count90
+\c@ead=\count91
+\c@author=\count92
+\@eadauthor=\toks15
+\c@affn=\count93
+\absbox=\box26
+\keybox=\box27
+\Columnwidth=\dimen106
+\space@left=\dimen107
+\els@boxa=\box28
+\els@boxb=\box29
+\leftMargin=\dimen108
+\@enLab=\toks16
+\@sep=\skip43
+\@@sep=\skip44
+ (./writeup.spl)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/natbib/natbib.sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip45
+\bibsep=\skip46
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count94
+)
+\splwrite=\write3
+\openout3 = `writeup.spl'.
+
+\appnamewidth=\dimen109
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\@emptytoks=\toks17
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
+(/usr/local/texlive/2014/texmf-dist/tex/latex/lineno/lineno.sty
+Package: lineno 2005/11/02 line numbers on paragraphs v4.41
+\linenopenalty=\count95
+\output=\toks18
+\linenoprevgraf=\count96
+\linenumbersep=\dimen110
+\linenumberwidth=\dimen111
+\c@linenumber=\count97
+\c@pagewiselinenumber=\count98
+\c@LN@truepage=\count99
+\c@internallinenumber=\count100
+\c@internallinenumbers=\count101
+\quotelinenumbersep=\dimen112
+\bframerule=\dimen113
+\bframesep=\dimen114
+\bframebox=\box30
+LaTeX Info: Redefining \\ on input line 3056.
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/adjustbox/adjustbox.sty
+Package: adjustbox 2012/05/21 v1.0 Adjusting TeX boxes (trim, clip, ...)
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+Package: xkeyval 2014/05/09 v2.6d package option processing (HA)
+
+(/usr/local/texlive/2014/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+\XKV@toks=\toks19
+\XKV@tempa@toks=\toks20
+\XKV@depth=\count102
+File: xkeyval.tex 2014/05/09 v2.6d key=value parser (HA)
+))
+(/usr/local/texlive/2014/texmf-dist/tex/latex/adjustbox/adjcalc.sty
+Package: adjcalc 2012/05/16 v1.1 Provides advanced setlength with multiple back
+-ends (calc, etex, pgfmath)
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/adjustbox/trimclip.sty
+Package: trimclip 2012/05/16 v1.0 Trim and clip general TeX material
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/collectbox/collectbox.sty
+Package: collectbox 2012/05/17 v0.4b Collect macro arguments as boxes
+\collectedbox=\box31
+)
+\tc@llx=\dimen115
+\tc@lly=\dimen116
+\tc@urx=\dimen117
+\tc@ury=\dimen118
+Package trimclip Info: Using driver 'tc-pdftex.def'.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/adjustbox/tc-pdftex.def
+File: tc-pdftex.def 2012/05/13 v1.0 Clipping driver for pdftex
+))
+\adjbox@Width=\dimen119
+\adjbox@Height=\dimen120
+\adjbox@Depth=\dimen121
+\adjbox@Totalheight=\dimen122
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
+Package: ifoddpage 2011/09/13 v1.0 Conditionals for odd/even page detection
+\c@checkoddpage=\count103
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/varwidth/varwidth.sty
+Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
+\@vwid@box=\box32
+\sift@deathcycles=\count104
+\@vwid@loff=\dimen123
+\@vwid@roff=\dimen124
+))
+(./writeup.aux)
+\openout1 = `writeup.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+
+(/usr/local/texlive/2014/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count105
+\scratchdimen=\dimen125
+\scratchbox=\box33
+\nofMPsegments=\count106
+\nofMParguments=\count107
+\everyMPshowfont=\toks21
+\MPscratchCnt=\count108
+\MPscratchDim=\dimen126
+\MPnumerator=\count109
+\makeMPintoPDFobject=\count110
+\everyMPtoPDFconversion=\toks22
+) (/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
+
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
+))
+(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+Missing character: There is no € in font cmr12!
+Missing character: There is no ™ in font cmr12!
+LaTeX Font Info:    Try loading font information for U+msa on input line 138.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 138.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) [1
+
+
+{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+Overfull \hbox (6.81532pt too wide) in paragraph at lines 154--156
+[]\OT1/cmr/m/n/12 More tra-di-tional meth-ods of mea-sur-ing the ef-fects of en
+-vi-ron-men-tal changes
+ []
+
+[2] [3] <../figures/thermoclineDepth.pdf, id=23, 433.62pt x 325.215pt>
+File: ../figures/thermoclineDepth.pdf Graphic file (type pdf)
+
+<use ../figures/thermoclineDepth.pdf>
+Package pdftex.def Info: ../figures/thermoclineDepth.pdf used on input line 216
+.
+(pdftex.def)             Requested size: 325.2142pt x 243.91064pt.
+ [4 <../figures/thermoclineDepth.pdf>]
+<../figures/foodAvailability.pdf, id=33, 433.62pt x 325.215pt>
+File: ../figures/foodAvailability.pdf Graphic file (type pdf)
+
+<use ../figures/foodAvailability.pdf>
+Package pdftex.def Info: ../figures/foodAvailability.pdf used on input line 224
+.
+(pdftex.def)             Requested size: 325.2142pt x 243.91064pt.
+
+<../figures/foodVariability.pdf, id=34, 433.62pt x 325.215pt>
+File: ../figures/foodVariability.pdf Graphic file (type pdf)
+
+<use ../figures/foodVariability.pdf>
+Package pdftex.def Info: ../figures/foodVariability.pdf used on input line 232.
+
+(pdftex.def)             Requested size: 325.2142pt x 243.91064pt.
+ [5 <../figures/foodAvailability.pdf>]
+[6 <../figures/foodVariability.pdf>]
+<../figures/lightThreshold.pdf, id=52, 433.62pt x 325.215pt>
+File: ../figures/lightThreshold.pdf Graphic file (type pdf)
+
+<use ../figures/lightThreshold.pdf>
+Package pdftex.def Info: ../figures/lightThreshold.pdf used on input line 249.
+(pdftex.def)             Requested size: 325.2142pt x 243.91064pt.
+ [7 <../figures/lightThreshold.pdf>]
+<../figures/migrationprob.pdf, id=62, 433.62pt x 325.215pt>
+File: ../figures/migrationprob.pdf Graphic file (type pdf)
+
+<use ../figures/migrationprob.pdf>
+Package pdftex.def Info: ../figures/migrationprob.pdf used on input line 261.
+(pdftex.def)             Requested size: 325.2142pt x 243.91064pt.
+ [8 <../figures/migrationprob.pdf>]
+<../figures/agentBasedModel.png, id=71, 963.6pt x 722.7pt>
+File: ../figures/agentBasedModel.png Graphic file (type png)
+
+<use ../figures/agentBasedModel.png>
+Package pdftex.def Info: ../figures/agentBasedModel.png used on input line 281.
+
+(pdftex.def)             Requested size: 289.08223pt x 216.81166pt.
+
+<../figures/hourlyDecision.png, id=73, 963.6pt x 722.7pt>
+File: ../figures/hourlyDecision.png Graphic file (type png)
+
+<use ../figures/hourlyDecision.png>
+Package pdftex.def Info: ../figures/hourlyDecision.png used on input line 289.
+(pdftex.def)             Requested size: 289.08223pt x 216.81166pt.
+
+<../figures/dailyDecision.png, id=74, 963.6pt x 722.7pt>
+File: ../figures/dailyDecision.png Graphic file (type png)
+
+<use ../figures/dailyDecision.png>
+Package pdftex.def Info: ../figures/dailyDecision.png used on input line 291.
+(pdftex.def)             Requested size: 289.08223pt x 216.81166pt.
+ [9 <../figures/agentBasedModel.png>]
+<../figures/shinyApp.png, id=79, 969.6225pt x 495.8525pt>
+File: ../figures/shinyApp.png Graphic file (type png)
+
+<use ../figures/shinyApp.png>
+Package pdftex.def Info: ../figures/shinyApp.png used on input line 304.
+(pdftex.def)             Requested size: 484.81006pt x 247.92564pt.
+ [10 <../figures/hourlyDecision.png> <../figures/dailyDecision.png>] <../figure
+s/mysocline.pdf, id=85, 433.62pt x 325.215pt>
+File: ../figures/mysocline.pdf Graphic file (type pdf)
+
+<use ../figures/mysocline.pdf>
+Package pdftex.def Info: ../figures/mysocline.pdf used on input line 313.
+(pdftex.def)             Requested size: 368.57874pt x 276.43405pt.
+ [11 <../figures/shinyApp.png>]
+<../figures/conditionPlot.pdf, id=90, 433.62pt x 325.215pt>
+File: ../figures/conditionPlot.pdf Graphic file (type pdf)
+
+<use ../figures/conditionPlot.pdf>
+Package pdftex.def Info: ../figures/conditionPlot.pdf used on input line 323.
+(pdftex.def)             Requested size: 368.57874pt x 276.43405pt.
+ [12 <../figures/mysocline.pdf>]
+<../figures/heatMap.pdf, id=99, 344.28625pt x 212.795pt>
+File: ../figures/heatMap.pdf Graphic file (type pdf)
+
+<use ../figures/heatMap.pdf>
+Package pdftex.def Info: ../figures/heatMap.pdf used on input line 329.
+(pdftex.def)             Requested size: 413.14142pt x 255.3527pt.
+ [13 <../figures/conditionPlot.pdf>]
+<../figures/daysMigrated.pdf, id=113, 511.9125pt x 381.425pt>
+File: ../figures/daysMigrated.pdf Graphic file (type pdf)
+
+<use ../figures/daysMigrated.pdf>
+Package pdftex.def Info: ../figures/daysMigrated.pdf used on input line 338.
+(pdftex.def)             Requested size: 332.73918pt x 247.9233pt.
+ [14 <../figures/heatMap.pdf>] [15 <../figures/daysMigrated.pdf>] (./writeup.bb
+l [16]
+Underfull \hbox (badness 1033) in paragraph at lines 33--40
+[]\OT1/cmr/m/n/12 B. T. Boscarino, L. G. Rud-stam, M. A. Min-son, E. E. Fre-und
+,
+ []
+
+) [17] (./writeup.aux) ) 
+Here is how much of TeX's memory you used:
+ 3422 strings out of 493117
+ 48735 string characters out of 6135433
+ 121762 words of memory out of 5000000
+ 6798 multiletter control sequences out of 15000+600000
+ 11973 words of font info for 46 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 38i,11n,35p,1230b,301s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2014/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmbx12.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmex10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmmi12.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmmi6.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmmi8.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmr12.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmr17.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmr7.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+r8.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy1
+0.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.
+pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.p
+fb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pf
+b>
+Output written on writeup.pdf (17 pages, 1178995 bytes).
+PDF statistics:
+ 181 PDF objects out of 1000 (max. 8388607)
+ 120 compressed objects within 2 object streams
+ 0 named destinations out of 1000 (max. 500000)
+ 66 words of extra memory for PDF output out of 10000 (max. 10000000)
+
