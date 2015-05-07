@@ -37,7 +37,7 @@ for (hour in hours){
 
 qplot(hours,foodAvail, geom = "line", main = "Food Availability Over Year")
 setwd("/Users/Nick/mysisModeling/paperMaterials/figures")
-ggsave(filename = "foodAvailability.pdf", width = 6, height = 4.5)
+ggsave(filename = "pres_foodAvailability.pdf", width = 6, height = 2.5)
 ```
 
 ## The variability curve
@@ -62,7 +62,7 @@ for (hour in hours){
 
 qplot(hours,variability, geom = "line", main = "Food Variability")
 setwd("/Users/Nick/mysisModeling/paperMaterials/figures")
-ggsave(filename = "foodVariability.pdf", width = 6, height = 4.5)
+ggsave(filename = "pres_foodVariability.pdf", width = 6, height = 2.5)
 
 avail_var_df = as.data.frame(cbind(foodAvail, variability))
 ```

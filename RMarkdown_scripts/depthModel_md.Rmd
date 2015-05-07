@@ -63,7 +63,7 @@ isoclineDf = as.data.frame(cbind(hours, isocline))
 m = ggplot(isoclineDf, aes(x = hours, y = -isocline)) + geom_line()
 m + labs(title = "Depth of Mysis Light Threshold", x = "hour", y = "depth from surface")
 setwd("/Users/Nick/mysisModeling/paperMaterials/figures")
-ggsave(filename = "lightThreshold.pdf", width = 6, height = 4.5)
+ggsave(filename = "pres_lightThreshold.pdf", width = 6, height = 2.5)
 
 ```
 
@@ -85,7 +85,7 @@ m = ggplot(mysoclineDf, aes(x = hours, y = -mysocline)) + geom_line()
 m = m + labs(title = "Depth of Mysocline", x = "hour", y = "depth from surface (m)") 
 m
 setwd("/Users/Nick/mysisModeling/paperMaterials/figures")
-ggsave(filename = "mysocline.pdf", width = 6, height = 4.5)
+ggsave(filename = "pres_mysocline.pdf", width = 6, height = 2.5)
 
 #write.csv(mysocline, "data/mysocline_hour.csv", row.names=FALSE)
 ```

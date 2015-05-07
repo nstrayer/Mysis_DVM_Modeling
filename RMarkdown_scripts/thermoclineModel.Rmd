@@ -53,6 +53,6 @@ thermocline = as.data.frame(data)
 ggplot(thermocline, aes(x = hours, y = dist)) + geom_line() + 
   labs(title = "Thermocline Depth", y = "depth")
 
-ggsave(filename = "../paperMaterials/figures/thermoclineDepth.pdf", width = 6, height = 4.5)
+ggsave(filename = "../paperMaterials/figures/pres_thermoclineDepth.pdf", width = 6, height = 2.5)
 #write.csv(data, "/Users/Nick/mysisModeling/data/Depth_Thermocline_Hour.csv", row.names=FALSE)
 ```
