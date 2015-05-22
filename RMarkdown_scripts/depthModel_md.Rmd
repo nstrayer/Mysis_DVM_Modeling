@@ -1,13 +1,13 @@
- ---
-title: "DepthModel"
+---
+title: "Depth Model"
 author: "Nick Strayer"
-date: "March 7, 2015"
+date: "March 8, 2015"
 output:
-  html_document:
-    fig_width: 9
+  pdf_document: default
+  html_document: default
+graphics: yes
 ---
 
----
 
 Just getting some initializing stuff out of the way and bring in some outside data that was generated in `thermoclineLevels.r` and `solarData.r`:
 

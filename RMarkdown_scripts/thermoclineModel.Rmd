@@ -2,7 +2,8 @@
 title: "Thermocline Model"
 author: "Nick Strayer"
 date: "March 8, 2015"
-output: html_document
+output: pdf_document
+graphics: yes
 ---
 
 ---

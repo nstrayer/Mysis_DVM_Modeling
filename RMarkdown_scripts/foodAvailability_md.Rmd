@@ -2,7 +2,7 @@
 title: "Food Availability Model"
 author: "Nick Strayer"
 date: "March 12, 2015"
-output: html_document
+output: pdf_document
 ---
 
 ```{r}
@@ -112,8 +112,8 @@ migrationProb = function(condition){ #I am choosing to leave the random roll out
 
 condition = seq(1,240, 0.1)
 results = sapply(condition, migrationProb)
-qplot(condition, results, geom = "line", main = "Migration Probability By Condition", ylab = "Prob. of Migration")
-setwd("/Users/Nick/mysisModeling/paperMaterials/figures")
-ggsave(filename = "migrationProb.pdf", width = 6, height = 4.5)
+#qplot(condition, results, geom = "line", main = "Migration Probability By Condition", ylab = "Prob. of Migration")
+#setwd("/Users/Nick/mysisModeling/paperMaterials/figures")
+#ggsave(filename = "migrationProb.pdf", width = 6, height = 4.5)
 
 ```

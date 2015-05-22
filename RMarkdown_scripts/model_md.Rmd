@@ -3,9 +3,11 @@ title: "Main Model"
 author: "Nick Strayer"
 date: "March 26, 2015"
 output:
+  pdf_document: default
   html_document:
     fig_height: 6
     fig_width: 9
+graphics: yes
 ---
 
 ```{r echo=FALSE}
@@ -194,7 +196,7 @@ Now that the model is all set up can run it over a small subset of the eventual 
 
 ```{r}
 mysids = NULL
-numOfMysids = 250
+numOfMysids = 15
 mysisNames = paste("mysis",(seq(1,numOfMysids)), sep = "")
 
 for (i in 1:numOfMysids){
@@ -230,6 +232,7 @@ for (mysid in mysids){ #loop through the mysis
 Let's plot this small run to see what kind of behavior we are getting. 
 
 ```{r echo=FALSE, results='hide'}
+setwd("/Users/Nick/mysisModeling")
 migrations = cbind(hours,migrations)
 
 #Make the dataframe for the migrations

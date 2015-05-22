@@ -3,7 +3,9 @@ title: "Solar Data"
 author: "Nick Strayer"
 date: "March 8, 2015"
 output:
+  pdf_document: default
   html_document: default
+graphics: yes
 ---
 
 ---

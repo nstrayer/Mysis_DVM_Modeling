@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  7 MAY 2015 09:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  7 MAY 2015 13:00
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -370,147 +370,155 @@ Overfull \hbox (6.81532pt too wide) in paragraph at lines 166--168
 -vi-ron-men-tal changes
  []
 
-[2] [3] <../figures/agentBasedModel.png, id=21, 963.6pt x 722.7pt>
+[2] [3] [4] <../figures/agentBasedModel.png, id=25, 963.6pt x 722.7pt>
 File: ../figures/agentBasedModel.png Graphic file (type png)
 
 <use ../figures/agentBasedModel.png>
-Package pdftex.def Info: ../figures/agentBasedModel.png used on input line 212.
+Package pdftex.def Info: ../figures/agentBasedModel.png used on input line 213.
 
-(pdftex.def)             Requested size: 289.08223pt x 216.81166pt.
+(pdftex.def)             Requested size: 240.89941pt x 180.67455pt.
 
-Overfull \hbox (16.08342pt too wide) in paragraph at lines 212--213
-[][] 
- []
-
-<../figures/dailyDecision.png, id=23, 963.6pt x 722.7pt>
+<../figures/dailyDecision.png, id=27, 963.6pt x 722.7pt>
 File: ../figures/dailyDecision.png Graphic file (type png)
 
 <use ../figures/dailyDecision.png>
-Package pdftex.def Info: ../figures/dailyDecision.png used on input line 216.
+Package pdftex.def Info: ../figures/dailyDecision.png used on input line 217.
 (pdftex.def)             Requested size: 233.9994pt x 175.49162pt.
 
-Overfull \hbox (38.9994pt too wide) in paragraph at lines 216--217
+Overfull \hbox (38.9994pt too wide) in paragraph at lines 217--218
 [][] 
  []
 
-<../figures/hourlyDecision.png, id=24, 963.6pt x 722.7pt>
+<../figures/hourlyDecision.png, id=28, 963.6pt x 722.7pt>
 File: ../figures/hourlyDecision.png Graphic file (type png)
 
 <use ../figures/hourlyDecision.png>
-Package pdftex.def Info: ../figures/hourlyDecision.png used on input line 222.
+Package pdftex.def Info: ../figures/hourlyDecision.png used on input line 223.
 (pdftex.def)             Requested size: 233.9994pt x 175.49162pt.
 
-Overfull \hbox (38.9994pt too wide) in paragraph at lines 222--223
+Overfull \hbox (38.9994pt too wide) in paragraph at lines 223--224
 [][] 
  []
 
 
-Overfull \hbox (5.22217pt too wide) in paragraph at lines 215--225
+Overfull \hbox (5.22217pt too wide) in paragraph at lines 216--226
  []$[]$  $[]$ 
  []
 
-[4 <../figures/agentBasedModel.png> <../figures/dailyDecision.png> <../figures/
-hourlyDecision.png>]
-<../figures/thermoclineDepth.pdf, id=32, 433.62pt x 325.215pt>
+[5
+
+ <../figures/agentBasedModel.png> <../figures/dailyDecision.png> <../figures/ho
+urlyDecision.png>]
+<../figures/thermoclineDepth.pdf, id=36, 433.62pt x 325.215pt>
 File: ../figures/thermoclineDepth.pdf Graphic file (type pdf)
 
 <use ../figures/thermoclineDepth.pdf>
-Package pdftex.def Info: ../figures/thermoclineDepth.pdf used on input line 251
+Package pdftex.def Info: ../figures/thermoclineDepth.pdf used on input line 252
 .
 (pdftex.def)             Requested size: 325.2142pt x 243.91064pt.
- [5 <../figures/thermoclineDepth.pdf>]
-[6
+ [6 <../figures/thermoclineDepth.pdf>]
+[7
 
-] <../figures/lightThreshold.pdf, id=48, 433.62pt x 325.215pt>
+] <../figures/lightThreshold.pdf, id=52, 433.62pt x 325.215pt>
 File: ../figures/lightThreshold.pdf Graphic file (type pdf)
 
 <use ../figures/lightThreshold.pdf>
-Package pdftex.def Info: ../figures/lightThreshold.pdf used on input line 275.
+Package pdftex.def Info: ../figures/lightThreshold.pdf used on input line 276.
 (pdftex.def)             Requested size: 325.2142pt x 243.91064pt.
- [7
+ [8
 
  <../figures/lightThreshold.pdf>]
-<../figures/foodAvailability.pdf, id=58, 433.62pt x 325.215pt>
+<../figures/foodAvailability.pdf, id=61, 433.62pt x 325.215pt>
 File: ../figures/foodAvailability.pdf Graphic file (type pdf)
 
 <use ../figures/foodAvailability.pdf>
 Package pdftex.def Info: ../figures/foodAvailability.pdf used on input line 290
 .
 (pdftex.def)             Requested size: 325.2142pt x 243.91064pt.
- [8
+ [9
 
  <../figures/foodAvailability.pdf>]
-<../figures/foodVariability.pdf, id=67, 433.62pt x 325.215pt>
+<../figures/foodVariability.pdf, id=70, 433.62pt x 325.215pt>
 File: ../figures/foodVariability.pdf Graphic file (type pdf)
 
 <use ../figures/foodVariability.pdf>
-Package pdftex.def Info: ../figures/foodVariability.pdf used on input line 303.
+Package pdftex.def Info: ../figures/foodVariability.pdf used on input line 304.
 
-(pdftex.def)             Requested size: 325.2142pt x 243.91064pt.
- [9 <../figures/foodVariability.pdf>]
-<../figures/migrationprob.pdf, id=76, 433.62pt x 325.215pt>
-File: ../figures/migrationprob.pdf Graphic file (type pdf)
-
-<use ../figures/migrationprob.pdf>
-Package pdftex.def Info: ../figures/migrationprob.pdf used on input line 317.
 (pdftex.def)             Requested size: 325.2142pt x 243.91064pt.
  [10
 
- <../figures/migrationprob.pdf>] [11]
-<../figures/shinyApp.png, id=90, 969.6225pt x 495.8525pt>
+ <../figures/foodVariability.pdf>]
+<../figures/migrationprob.pdf, id=80, 433.62pt x 325.215pt>
+File: ../figures/migrationprob.pdf Graphic file (type pdf)
+
+<use ../figures/migrationprob.pdf>
+Package pdftex.def Info: ../figures/migrationprob.pdf used on input line 318.
+(pdftex.def)             Requested size: 325.2142pt x 243.91064pt.
+
+Overfull \hbox (3.32997pt too wide) in paragraph at lines 324--325
+\OT1/cmr/m/n/12 ($[](\OML/cmm/m/it/12 h\OT1/cmr/m/n/12 )$) with a stan-dard de-
+vi-a-tion of the food vari-abil-ity at that hour ($[](\OML/cmm/m/it/12 h\OT1/cm
+r/m/n/12 )$).
+ []
+
+[11
+
+ <../figures/migrationprob.pdf>] [12]
+<../figures/shinyApp.png, id=93, 969.6225pt x 495.8525pt>
 File: ../figures/shinyApp.png Graphic file (type png)
 
 <use ../figures/shinyApp.png>
-Package pdftex.def Info: ../figures/shinyApp.png used on input line 387.
+Package pdftex.def Info: ../figures/shinyApp.png used on input line 388.
 (pdftex.def)             Requested size: 387.84213pt x 198.33748pt.
+
+<../figures/mysocline.pdf, id=94, 433.62pt x 325.215pt>
+File: ../figures/mysocline.pdf Graphic file (type pdf)
+
+<use ../figures/mysocline.pdf>
+Package pdftex.def Info: ../figures/mysocline.pdf used on input line 401.
+(pdftex.def)             Requested size: 368.57874pt x 276.43405pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[12] [13 <../figures/shinyApp.png>]
-<../figures/mysocline.pdf, id=99, 433.62pt x 325.215pt>
-File: ../figures/mysocline.pdf Graphic file (type pdf)
-
-<use ../figures/mysocline.pdf>
-Package pdftex.def Info: ../figures/mysocline.pdf used on input line 400.
-(pdftex.def)             Requested size: 368.57874pt x 276.43405pt.
-
-<../figures/conditionPlot.pdf, id=100, 433.62pt x 325.215pt>
+<../figures/conditionPlot.pdf, id=95, 433.62pt x 325.215pt>
 File: ../figures/conditionPlot.pdf Graphic file (type pdf)
 
 <use ../figures/conditionPlot.pdf>
-Package pdftex.def Info: ../figures/conditionPlot.pdf used on input line 414.
+Package pdftex.def Info: ../figures/conditionPlot.pdf used on input line 415.
 (pdftex.def)             Requested size: 368.57874pt x 276.43405pt.
- [14
 
- <../figures/mysocline.pdf>]
-<../figures/heatMap.pdf, id=109, 344.28625pt x 212.795pt>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[13 <../figures/shinyApp.png>]
+<../figures/heatMap.pdf, id=101, 344.28625pt x 212.795pt>
 File: ../figures/heatMap.pdf Graphic file (type pdf)
 
 <use ../figures/heatMap.pdf>
-Package pdftex.def Info: ../figures/heatMap.pdf used on input line 424.
+Package pdftex.def Info: ../figures/heatMap.pdf used on input line 425.
 (pdftex.def)             Requested size: 413.14142pt x 255.3527pt.
 
-Overfull \hbox (23.14142pt too wide) in paragraph at lines 424--425
+Overfull \hbox (23.14142pt too wide) in paragraph at lines 425--426
  [][] 
  []
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[15 <../figures/conditionPlot.pdf>]
-<../figures/daysMigrated.pdf, id=122, 511.9125pt x 381.425pt>
+[14 <../figures/mysocline.pdf>]
+<../figures/daysMigrated.pdf, id=110, 511.9125pt x 381.425pt>
 File: ../figures/daysMigrated.pdf Graphic file (type pdf)
 
 <use ../figures/daysMigrated.pdf>
-Package pdftex.def Info: ../figures/daysMigrated.pdf used on input line 438.
+Package pdftex.def Info: ../figures/daysMigrated.pdf used on input line 439.
 (pdftex.def)             Requested size: 332.73918pt x 247.9233pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[16 <../figures/heatMap.pdf>] [17 <../figures/daysMigrated.pdf>] (./writeup.bbl
-
+[15 <../figures/conditionPlot.pdf>] [16 <../figures/heatMap.pdf>] [17 <../figur
+es/daysMigrated.pdf>] (./writeup.bbl
 Underfull \hbox (badness 1033) in paragraph at lines 33--40
 []\OT1/cmr/m/n/12 B. T. Boscarino, L. G. Rud-stam, M. A. Min-son, E. E. Fre-und
 ,
@@ -520,7 +528,7 @@ Underfull \hbox (badness 1033) in paragraph at lines 33--40
 Here is how much of TeX's memory you used:
  5167 strings out of 493117
  76039 string characters out of 6135433
- 156984 words of memory out of 5000000
+ 154984 words of memory out of 5000000
  8513 multiletter control sequences out of 15000+600000
  13321 words of font info for 50 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -542,7 +550,7 @@ mr8.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
 fb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pf
 b></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb
 >
-Output written on writeup.pdf (19 pages, 1216326 bytes).
+Output written on writeup.pdf (19 pages, 1216708 bytes).
 PDF statistics:
  200 PDF objects out of 1000 (max. 8388607)
  134 compressed objects within 2 object streams
