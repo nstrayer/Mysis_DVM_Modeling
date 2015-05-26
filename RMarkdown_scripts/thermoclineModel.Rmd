@@ -51,7 +51,7 @@ library(ggplot2)
 data = cbind(hours, dist) # Wrap the data. 
 
 thermocline = as.data.frame(data)
-ggplot(thermocline, aes(x = hours, y = dist)) + geom_line() + 
+ggplot(thermocline, aes(x = hours, y = -dist)) + geom_line() + 
   labs(title = "Thermocline Depth", y = "depth")
 
 ggsave(filename = "../paperMaterials/figures/pres_thermoclineDepth.pdf", width = 6, height = 2.5)
